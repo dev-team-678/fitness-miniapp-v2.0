@@ -45,7 +45,7 @@
   "appid": "wx90b1208b20cb9615",
   "projectname": "fitness-miniapp",
   "description": "运动健身助手小程序",
-  "libVersion": "2.25.0",
+  "libVersion": "3.16.1",
   "compileType": "miniprogram",
   "condition": {},
   "simulatorPluginLibVersion": {},

@@ -3,7 +3,7 @@
  * 替代原有云函数 callFunction 调用方式
  */
 
-const BASE_URL = 'https://your-domain.com/api/v1';
+const BASE_URL = 'http://118.25.55.203/api/v1';
 
 // Token 管理
 const tokenManager = {
@@ -45,7 +45,7 @@ function request(options) {
       data: options.data,
       header: {
         'Content-Type': 'application/json',
-        'Authorization': token ? `Bearer ${token}` : '',
+        ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
         ...options.header
       },
       success(res) {
