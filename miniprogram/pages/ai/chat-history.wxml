@@ -1,0 +1,47 @@
+<view class="chat-history-page">
+  <!-- 顶部新建按钮 -->
+  <view class="header-bar">
+    <text class="title">对话历史</text>
+    <van-button size="small" type="primary" round icon="plus" bind:click="goNewChat">新对话</van-button>
+  </view>
+
+  <!-- 会话列表 -->
+  <view class="session-list" wx:if="{{sessions.length > 0}}">
+    <view
+      class="session-item"
+      wx:for="{{sessions}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bind:tap="goChat"
+    >
+      <view class="session-icon">
+        <text>🤖</text>
+      </view>
+      <view class="session-info">
+        <view class="session-title">{{item.title || '新对话'}}</view>
+        <view class="session-meta">
+          <text class="msg-count">{{item.messageCountText}}</text>
+          <text class="session-time">{{item.timeStr}}</text>
+        </view>
+      </view>
+      <van-icon name="arrow" size="14px" color="#ccc" />
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <empty-state
+    wx:if="{{!loading && sessions.length === 0}}"
+    image="search"
+    description="还没有对话记录"
+    btn-text="开始对话"
+    bind:click="goNewChat"
+  />
+
+  <!-- 加载更多 -->
+  <view class="load-more" wx:if="{{loading}}">
+    <van-loading size="20px">加载中...</van-loading>
+  </view>
+  <view class="no-more" wx:if="{{noMore && sessions.length > 0}}">
+    <text>没有更多了</text>
+  </view>
+</view>

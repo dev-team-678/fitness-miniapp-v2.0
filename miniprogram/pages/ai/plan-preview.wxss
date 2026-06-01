@@ -1,0 +1,169 @@
+.plan-preview-page {
+  min-height: 100vh;
+  background: #F5F5FA;
+  padding-bottom: 160rpx;
+}
+
+.loading-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+.plan-header {
+  background: linear-gradient(135deg, #6C5CE7, #a29bfe);
+  padding: 40rpx 32rpx;
+  color: #fff;
+}
+
+.plan-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 8rpx 20rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  margin-bottom: 16rpx;
+}
+
+.plan-info-row {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.plan-split {
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.plan-days {
+  font-size: 26rpx;
+  opacity: 0.8;
+}
+
+.weekly-plan {
+  padding: 16rpx 24rpx;
+}
+
+.day-card {
+  background: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 16rpx;
+  overflow: hidden;
+}
+
+.day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.day-label {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.rest-tag {
+  font-size: 22rpx;
+  color: #4CAF50;
+  background: #E8F5E9;
+  padding: 4rpx 16rpx;
+  border-radius: 12rpx;
+}
+
+.exercise-list {
+  padding: 8rpx 0;
+}
+
+.exercise-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16rpx 24rpx;
+}
+
+.exercise-row:active {
+  background: #f5f5f5;
+}
+
+.ex-name {
+  font-size: 28rpx;
+  color: #333;
+  flex: 1;
+}
+
+.ex-sets {
+  font-size: 26rpx;
+  color: #FF6B35;
+  font-weight: 500;
+  margin-left: 16rpx;
+}
+
+.rest-hint {
+  padding: 32rpx 24rpx;
+  text-align: center;
+  color: #999;
+  font-size: 26rpx;
+}
+
+.explanation-section {
+  margin: 16rpx 24rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.exp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx;
+  font-size: 28rpx;
+  color: #6C5CE7;
+  font-weight: 500;
+}
+
+.exp-content {
+  padding: 0 24rpx 24rpx;
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.6;
+}
+
+.disclaimer {
+  margin: 24rpx;
+  padding: 20rpx;
+  background: #FFF3E0;
+  border-radius: 12rpx;
+  font-size: 22rpx;
+  color: #E65100;
+  line-height: 1.5;
+}
+
+.bottom-actions {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: 20rpx;
+  padding: 20rpx 32rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  background: #fff;
+  box-shadow: 0 -2rpx 10rpx rgba(0,0,0,0.05);
+}
+
+.btn-regen {
+  flex: 1;
+  border-color: #FF6B35 !important;
+  color: #FF6B35 !important;
+}
+
+.btn-confirm {
+  flex: 2;
+  background: #FF6B35 !important;
+}

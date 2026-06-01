@@ -1,0 +1,93 @@
+<view class="container">
+  <view class="tabs">
+    <view class="tab-list">
+      <view
+        wx:for="{{tabs}}"
+        wx:key="key"
+        class="tab-item {{tab === item.key ? 'active' : ''}}"
+        data-tab="{{item.key}}"
+        bindtap="switchTab"
+      >{{item.label}}</view>
+    </view>
+  </view>
+
+  <view class="post-list">
+    <view wx:if="{{posts.length === 0 && !loading}}" class="empty">
+      <image src="/images/empty-post.png" mode="aspectFit" class="empty-icon"/>
+      <text class="empty-text">还没有动态，快来发布第一条吧</text>
+      <button class="btn-share" bindtap="goToPublish">分享训练</button>
+    </view>
+
+    <view
+      wx:for="{{posts}}"
+      wx:key="id"
+      class="post-card"
+      data-id="{{item.id}}"
+      bindtap="goToDetail"
+    >
+      <view class="post-header">
+        <view class="user-info" data-userid="{{item.userId}}" catchtap="goToProfile">
+          <image src="{{item.avatarUrl || '/images/avatar-default.png'}}" class="avatar"/>
+          <view class="user-detail">
+            <text class="nickname">{{item.nickname || '匿名用户'}}</text>
+            <text class="time">{{item.createdAt}}</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="post-content">
+        <text class="content-text">{{item.content}}</text>
+      </view>
+
+      <view wx:if="{{item.images.length > 0}}" class="post-images">
+        <image
+          wx:for="{{item.images}}"
+          wx:for-item="img"
+          wx:key="index"
+          src="{{img}}"
+          mode="aspectFill"
+          class="post-image"
+          data-imgs="{{item.images}}"
+          data-index="{{index}}"
+          bindtap="previewImage"
+        />
+      </view>
+
+      <view wx:if="{{item.workoutLogId}}" class="workout-share" data-id="{{item.workoutLogId}}">
+        <view class="workout-icon">🏋️</view>
+        <text class="workout-text">查看训练记录</text>
+        <text class="arrow">›</text>
+      </view>
+
+      <view class="post-actions">
+        <view
+          class="action-item {{item.isLiked ? 'liked' : ''}}"
+          data-id="{{item.id}}"
+          data-liked="{{item.isLiked}}"
+          bindtap="onLike"
+        >
+          <text class="action-icon">{{item.isLiked ? '❤️' : '🤍'}}</text>
+          <text class="action-count">{{item.likeCount || 0}}</text>
+        </view>
+
+        <view class="action-item" data-id="{{item.id}}" bindtap="goToDetail">
+          <text class="action-icon">💬</text>
+          <text class="action-count">{{item.commentCount || 0}}</text>
+        </view>
+
+        <view class="action-item" data-id="{{item.id}}" bindtap="onShare">
+          <text class="action-icon">📤</text>
+          <text class="action-text">分享</text>
+        </view>
+      </view>
+    </view>
+
+    <view wx:if="{{loading}}" class="loading">
+      <text>加载中...</text>
+    </view>
+
+    <view wx:if="{{!hasMore && posts.length > 0}}" class="no-more">
+      <text>没有更多了</text>
+    </view>
+  </view>
+</view>

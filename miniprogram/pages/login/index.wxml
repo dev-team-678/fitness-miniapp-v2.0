@@ -1,0 +1,22 @@
+<view class="login-page">
+  <view class="logo-area">
+    <image class="logo" src="/images/logo.png" mode="aspectFit"></image>
+    <text class="app-name">运动健身助手</text>
+    <text class="app-desc">科学训练 · 智能计划 · AI 助手</text>
+  </view>
+
+  <view class="login-area">
+    <van-button
+      type="primary"
+      block
+      round
+      loading="{{loading}}"
+      loading-text="登录中..."
+      custom-class="login-btn"
+      bind:click="onLogin"
+    >
+      微信一键登录
+    </van-button>
+    <text class="login-tip">登录即表示同意用户协议和隐私政策</text>
+  </view>
+</view>

@@ -1,0 +1,74 @@
+<view class="plan-preview-page">
+  <!-- 加载中 -->
+  <view class="loading-wrap" wx:if="{{loading}}">
+    <van-loading size="40px" type="spinner">加载计划中...</van-loading>
+  </view>
+
+  <block wx:elif="{{plan}}">
+    <!-- 计划头部 -->
+    <view class="plan-header">
+      <view class="plan-badge">{{goalLabel}}</view>
+      <view class="plan-info-row">
+        <text class="plan-split">{{splitLabel}}</text>
+        <text class="plan-days">每周{{plan.daysPerWeek}}天</text>
+      </view>
+    </view>
+
+    <!-- 每周计划 -->
+    <view class="weekly-plan">
+      <view class="day-card" wx:for="{{plan.weeklyPlan}}" wx:key="dayOfWeek">
+        <view class="day-header">
+          <text class="day-label">📅 {{item.dayLabel || ('Day ' + item.dayOfWeek)}}</text>
+          <text class="rest-tag" wx:if="{{item.isRestDay}}">休息日</text>
+        </view>
+        <view class="exercise-list" wx:if="{{!item.isRestDay && item.exercises}}">
+          <view
+            class="exercise-row"
+            wx:for="{{item.exercises}}"
+            wx:for-item="ex"
+            wx:key="exerciseId"
+            data-id="{{ex.exerciseId}}"
+            bind:tap="goExerciseDetail"
+          >
+            <text class="ex-name">{{ex.exerciseName}}</text>
+            <text class="ex-sets">{{ex.sets}}×{{ex.reps}}</text>
+          </view>
+        </view>
+        <view class="rest-hint" wx:if="{{item.isRestDay}}">
+          <text>好好休息，恢复能量 💤</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 计划解释 -->
+    <view class="explanation-section" wx:if="{{plan.explanation}}">
+      <view class="exp-header" bind:tap="toggleExplanation">
+        <text>💡 为什么这么排？</text>
+        <van-icon name="{{showExplanation ? 'arrow-up' : 'arrow-down'}}" size="14px" />
+      </view>
+      <view class="exp-content" wx:if="{{showExplanation}}">
+        <text>{{plan.explanation}}</text>
+      </view>
+    </view>
+
+    <!-- 免责声明 -->
+    <view class="disclaimer">
+      <text>⚠️ 本计划由 AI 生成，仅供参考。请根据自身情况调整，如有伤病请咨询专业教练。</text>
+    </view>
+
+    <!-- 底部操作 -->
+    <view class="bottom-actions">
+      <van-button plain round custom-class="btn-regen" bind:click="onRegenerate">重新生成</van-button>
+      <van-button type="primary" round loading="{{confirming}}" custom-class="btn-confirm" bind:click="onConfirm">确认使用</van-button>
+    </view>
+  </block>
+
+  <!-- 加载失败 -->
+  <empty-state
+    wx:elif="{{!loading && !plan}}"
+    image="error"
+    description="计划加载失败"
+    btn-text="返回重试"
+    bind:click="onRegenerate"
+  />
+</view>
