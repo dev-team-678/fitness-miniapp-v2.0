@@ -1,6 +1,5 @@
 {
   "miniprogramRoot": "miniprogram/",
-  "cloudfunctionRoot": "cloudfunctions/",
   "setting": {
     "urlCheck": true,
     "es6": true,
@@ -43,12 +42,11 @@
     "swc": false,
     "disableSWC": true
   },
-  "appid": "wx8782af9f11946d31",
+  "appid": "wx90b1208b20cb9615",
   "projectname": "fitness-miniapp",
   "description": "运动健身助手小程序",
   "libVersion": "2.25.0",
   "compileType": "miniprogram",
-  "cloudfunctionTemplateRoot": "cloudfunctionTemplate/",
   "condition": {},
   "simulatorPluginLibVersion": {},
   "packOptions": {
