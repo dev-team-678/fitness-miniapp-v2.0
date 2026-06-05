@@ -18,6 +18,7 @@
     "pages/profile/pr-records",
     "pages/profile/favorites",
     "pages/profile/achievements",
+    "pages/profile/setting",
     "pages/ai/chat",
     "pages/ai/chat-history",
     "pages/ai/plan-generator",

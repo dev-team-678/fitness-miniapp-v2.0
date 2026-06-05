@@ -23,11 +23,16 @@ Page({
 
   async onShow() {
     if (!getApp().checkLogin()) return;
-    await this.loadUserInfo();
-    this.loadTodayPlan();
-    this.loadStats();
-    this.loadCheckinStreak();
-    this.loadLatestAnnouncement();
+    try {
+      await this.loadUserInfo();
+      this.loadTodayPlan();
+      this.loadStats();
+      this.loadCheckinStreak();
+      this.loadLatestAnnouncement();
+    } catch (err) {
+      console.error('加载用户信息失败:', err);
+      // loadUserInfo 失败时停止后续请求
+    }
   },
 
   onPullDownRefresh() {
@@ -48,11 +53,12 @@ Page({
 
   async loadUserInfo() {
     try {
-      const user = await request({ url: '/user/profile' });
+      const user = await request({ url: '/miniapp/user/profile' });
       this.setData({ userInfo: user });
       getApp().globalData.userInfo = user;
     } catch (err) {
       console.error('加载用户信息失败:', err);
+      throw err; // 重新抛出错误，阻止后续请求
     }
   },
 
@@ -76,6 +82,7 @@ Page({
         this.setData({
           todayPlan: {
             planId: detail.id,
+            planDayId: todayDay.id,
             planName: detail.name,
             dayLabel: todayDay.dayLabel || '训练日',
             exercises: todayDay.exercises || []
@@ -87,6 +94,7 @@ Page({
           this.setData({
             todayPlan: {
               planId: detail.id,
+              planDayId: trainingDays[0].id,
               planName: detail.name + ' (下次)',
               dayLabel: trainingDays[0].dayLabel || '训练日',
               exercises: trainingDays[0].exercises || []
@@ -101,8 +109,8 @@ Page({
 
   async loadStats() {
     try {
-      const stats = await request({ url: '/workout/stats', data: { period: 'week' } });
-      const history = await request({ url: '/workout/history', data: { pageSize: 100, status: 'completed' } });
+      const stats = await request({ url: '/miniapp/workout/stats', data: { period: 'week' } });
+      const history = await request({ url: '/miniapp/workout/history', data: { pageSize: 100, status: 'completed' } });
 
       if (history && history.list) {
         const weekDates = this.data.weekDates.map(item => ({
@@ -124,7 +132,7 @@ Page({
 
   async loadCheckinStreak() {
     try {
-      const res = await request({ url: '/checkin/streak' });
+      const res = await request({ url: '/miniapp/checkin/streak' });
       this.setData({ streakDays: res.currentStreak || 0 });
     } catch (err) {
       console.error('加载打卡失败:', err);
@@ -133,7 +141,7 @@ Page({
 
   async loadLatestAnnouncement() {
     try {
-      const res = await request({ url: '/announcement/latest' });
+      const res = await request({ url: '/miniapp/announcement/latest' });
       if (res && res.isPopup) {
         this.setData({ latestAnnouncement: res });
       }
@@ -159,6 +167,24 @@ Page({
     wx.navigateTo({ url: `/pages/plan/detail?id=${id}` });
   },
 
+  async onStartTodayWorkout() {
+    const { todayPlan } = this.data;
+    if (!todayPlan || !todayPlan.planId) {
+      wx.showToast({ title: '暂无训练计划', icon: 'none' });
+      return;
+    }
+
+    // 如果有训练日ID，直接开始训练
+    if (todayPlan.planDayId) {
+      wx.navigateTo({
+        url: `/pages/workout/start?planId=${todayPlan.planId}&planDayId=${todayPlan.planDayId}`
+      });
+    } else {
+      // 否则跳转到计划详情页选择训练日
+      wx.navigateTo({ url: `/pages/plan/detail?id=${todayPlan.planId}` });
+    }
+  },
+
   goPlanList() {
     wx.navigateTo({ url: '/pages/plan/list' });
   },
@@ -181,5 +207,19 @@ Page({
 
   goProfile() {
     wx.switchTab({ url: '/pages/profile/index' });
+  },
+
+  async onCheckin() {
+    try {
+      const res = await request({
+        method: 'POST',
+        url: '/miniapp/checkin',
+        data: { checkinType: 'workout' }
+      });
+      this.setData({ todayCheckedIn: true, streakDays: res.streakDays || this.data.streakDays + 1 });
+      wx.showToast({ title: `打卡成功，连续${res.streakDays || this.data.streakDays}天`, icon: 'none' });
+    } catch (err) {
+      wx.showToast({ title: err.message || '打卡失败', icon: 'none' });
+    }
   }
 });

@@ -1,7 +1,7 @@
 <view class="container" wx:if="{{exercise}}">
   <!-- 演示图 -->
   <view class="demo-area" bindtap="onPreviewImage">
-    <image wx:if="{{exercise.demo_image_url}}" src="{{exercise.demo_image_url}}" mode="aspectFill" class="demo-img"></image>
+    <image wx:if="{{exercise.demoImageUrl}}" src="{{exercise.demoImageUrl}}" mode="aspectFill" class="demo-img"></image>
     <view wx:else class="demo-placeholder">
       <text class="demo-icon">💪</text>
     </view>
@@ -13,24 +13,24 @@
   <!-- 基本信息 -->
   <view class="info-card card">
     <text class="ex-name">{{exercise.name}}</text>
-    <text class="ex-name-en" wx:if="{{exercise.name_en}}">{{exercise.name_en}}</text>
+    <text class="ex-name-en" wx:if="{{exercise.nameEn}}">{{exercise.nameEn}}</text>
     <view class="ex-tags">
-      <van-tag type="primary" round>{{exercise.exercise_type === 'strength' ? '力量训练' : exercise.exercise_type === 'cardio' ? '有氧运动' : '其他'}}</van-tag>
+      <van-tag type="primary" round>{{exercise.exerciseType === 'strength' ? '力量训练' : exercise.exerciseType === 'cardio' ? '有氧运动' : '其他'}}</van-tag>
       <van-tag round wx:if="{{exercise.difficulty === 'beginner'}}" type="success">入门</van-tag>
       <van-tag round wx:elif="{{exercise.difficulty === 'intermediate'}}" type="warning">进阶</van-tag>
       <van-tag round wx:elif="{{exercise.difficulty === 'advanced'}}" type="danger">高级</van-tag>
       <van-tag round wx:if="{{exercise.equipment && exercise.equipment !== 'none'}}">{{exercise.equipment}}</van-tag>
-      <van-tag round wx:if="{{exercise.is_compound}}">复合动作</van-tag>
+      <van-tag round wx:if="{{exercise.isCompound}}">复合动作</van-tag>
     </view>
   </view>
 
   <!-- 目标肌群 -->
-  <view class="card" wx:if="{{exercise.body_parts && exercise.body_parts.length > 0}}">
+  <view class="card" wx:if="{{exercise.bodyParts && exercise.bodyParts.length > 0}}">
     <view class="section-title">🎯 目标肌群</view>
     <view class="muscle-list">
-      <view class="muscle-item" wx:for="{{exercise.body_parts}}" wx:key="body_part_id">
+      <view class="muscle-item" wx:for="{{exercise.bodyParts}}" wx:key="bodyPartId">
         <text class="muscle-name">{{item.name}}</text>
-        <van-tag size="mini" type="{{item.is_primary ? 'primary' : ''}}">{{item.is_primary ? '主要' : '辅助'}}</van-tag>
+        <van-tag size="mini" type="{{item.isPrimary ? 'primary' : ''}}">{{item.isPrimary ? '主要' : '辅助'}}</van-tag>
       </view>
     </view>
   </view>

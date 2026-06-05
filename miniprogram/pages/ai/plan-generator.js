@@ -67,7 +67,7 @@ Page({
     try {
       const result = await request({
         method: 'POST',
-        url: '/ai/plan/generate',
+        url: '/miniapp/ai/plan/generate',
         data: {
           goal: this.data.goal,
           fitnessLevel: this.data.fitnessLevel,
@@ -117,7 +117,7 @@ Page({
     try {
       const result = await request({
         method: 'POST',
-        url: '/ai/plan/confirm',
+        url: '/miniapp/ai/plan/confirm',
         data: {
           aiPlanId: this.data.generatedPlan.aiPlanId,
           planName: this.data.planName,

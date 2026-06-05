@@ -13,12 +13,13 @@
   </view>
 
   <!-- 今日计划卡片 -->
-  <view class="today-plan card" wx:if="{{todayPlan}}" bindtap="goPlanDetail" data-id="{{todayPlan.planId}}">
-    <view class="plan-header">
+  <view class="today-plan card" wx:if="{{todayPlan}}">
+    <view class="plan-header" bindtap="goPlanDetail" data-id="{{todayPlan.planId}}">
       <view class="plan-tag">📅 今日计划</view>
-      <view class="plan-name">{{todayPlan.dayLabel || '训练日'}}</view>
+      <view class="plan-name">{{todayPlan.planName}}</view>
+      <view class="plan-day-label" wx:if="{{todayPlan.dayLabel}}">{{todayPlan.dayLabel}}</view>
     </view>
-    <view class="plan-exercises">
+    <view class="plan-exercises" bindtap="goPlanDetail" data-id="{{todayPlan.planId}}">
       <view class="plan-exercise-item" wx:for="{{todayPlan.exercises}}" wx:key="exercise_id" wx:if="{{index < 4}}">
         <text class="ex-name">{{item.exercise_name}}</text>
         <text class="ex-detail">{{item.sets}}×{{item.reps || '-'}}</text>
@@ -28,7 +29,8 @@
       </view>
     </view>
     <view class="plan-action">
-      <van-button type="primary" round block custom-style="background: linear-gradient(135deg, #FF6B35, #FF8F65); border: none; height: 80rpx; font-size: 30rpx;">
+      <van-button type="primary" round block custom-style="background: linear-gradient(135deg, #FF6B35, #FF8F65); border: none; height: 80rpx; font-size: 30rpx;"
+                  bindtap="onStartTodayWorkout">
         开始训练
       </van-button>
     </view>

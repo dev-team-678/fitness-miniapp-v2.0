@@ -20,7 +20,7 @@ Page({
   async loadAchievements() {
     this.setData({ loading: true });
     try {
-      const res = await request({ url: '/achievement/list' });
+      const res = await request({ url: '/miniapp/checkin/achievements' });
       this.setData({
         categories: res.categories || [],
         stats: res.stats || { total: 0, unlocked: 0, progress: 0 }

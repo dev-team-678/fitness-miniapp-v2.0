@@ -73,7 +73,7 @@ Page({
   async startFromPlan(planId, planDayId) {
     try {
       showLoading('加载训练...');
-      const res = await request({ method: 'POST', url: '/workout/start', data: { planId, planDayId } });
+      const res = await request({ method: 'POST', url: '/miniapp/workout/start', data: { planId, planDayId } });
       hideLoading();
 
       const exercises = (res.exercises || []).map(ex => ({
@@ -99,7 +99,7 @@ Page({
   async startFreeWorkout() {
     try {
       showLoading('创建训练...');
-      const res = await request({ method: 'POST', url: '/workout/start', data: {} });
+      const res = await request({ method: 'POST', url: '/miniapp/workout/start', data: {} });
       hideLoading();
 
       this.setData({
@@ -171,7 +171,7 @@ Page({
     try {
       await request({
         method: 'POST',
-        url: '/workout/log-set',
+        url: '/miniapp/workout/log-set',
         data: {
           workoutLogId,
           exerciseId: exercise.exercise_id,
@@ -316,7 +316,7 @@ Page({
       showLoading('保存训练...');
       const res = await request({
         method: 'POST',
-        url: '/workout/complete',
+        url: '/miniapp/workout/complete',
         data: {
           workoutLogId,
           feelingScore,

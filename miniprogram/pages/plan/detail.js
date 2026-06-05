@@ -26,23 +26,22 @@ Page({
     try {
       wx.showLoading({ title: '加载中...' });
       const res = await request({ url: `/plan/${this.data.planId}` });
-      
+
       if (res) {
-        const { plan, days } = res;
-        const weekCount = plan.duration_weeks || 1;
-        
+        const weekCount = res.durationWeeks || 1;
+
         // 处理每天的动作数据
-        const processedDays = days.map(day => ({
+        const processedDays = (res.days || []).map(day => ({
           ...day,
-          expanded: !day.is_rest_day
+          expanded: day.exercises && day.exercises.length > 0
         }));
 
         this.setData({
-          plan,
+          plan: res,
           days: processedDays,
           weekCount,
-          difficultyLabel: util.getDifficultyLabel(plan.difficulty_level),
-          goalLabel: util.getGoalLabel(plan.fitness_goal)
+          difficultyLabel: util.getDifficultyLabel(res.difficultyLevel),
+          goalLabel: util.getGoalLabel(res.fitnessGoal)
         });
 
         this.updateCurrentDays();
@@ -69,8 +68,8 @@ Page({
   onCalendarDayTap(e) {
     const { weekNumber, dayOfWeek, dayData } = e.detail;
     // 找到对应的计划日
-    const day = this.data.days.find(d => d.week_number === weekNumber && d.day_of_week === dayOfWeek);
-    if (day && !day.is_rest_day) {
+    const day = this.data.days.find(d => d.weekNumber === weekNumber && d.dayOfWeek === dayOfWeek);
+    if (day && (!day.exercises || day.exercises.length === 0) === false) {
       wx.navigateTo({
         url: `/pages/workout/start?planId=${this.data.planId}&planDayId=${day.id}`
       });
@@ -79,7 +78,7 @@ Page({
 
   updateCurrentDays() {
     const { days, currentWeek } = this.data;
-    const currentDays = days.filter(d => d.week_number === currentWeek);
+    const currentDays = days.filter(d => d.weekNumber === currentWeek);
     this.setData({ currentDays });
   },
 

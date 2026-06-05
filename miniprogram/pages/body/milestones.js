@@ -22,7 +22,7 @@ Page({
   async loadMilestones() {
     this.setData({ loading: true });
     try {
-      const res = await request({ url: '/body/milestones' });
+      const res = await request({ url: '/miniapp/body/milestones' });
       this.setData({
         milestones: res.milestones || [],
         totalDays: res.totalDays || 0,

@@ -10,18 +10,18 @@
   </view>
 
   <!-- 成就分类 -->
-  <view wx:for="{{categories}}" wx:key="key" class="category-section">
-    <view class="category-title">{{item.name}}</view>
+  <view wx:for="{{categories}}" wx:key="type" class="category-section">
+    <view class="category-title">{{item.type}}</view>
     <view class="achievement-grid">
-      <view class="achievement-item {{achievement.is_unlocked ? 'unlocked' : 'locked'}}" wx:for="{{item.list}}" wx:for-item="achievement" wx:key="id">
-        <view class="achievement-icon">{{achievement.icon}}</view>
+      <view class="achievement-item {{achievement.unlocked ? 'unlocked' : 'locked'}}" wx:for="{{item.achievements}}" wx:for-item="achievement" wx:key="id">
+        <image wx:if="{{achievement.iconUrl}}" class="achievement-icon-img" src="{{achievement.iconUrl}}" mode="aspectFit"/>
+        <view wx:else class="achievement-icon">🏅</view>
         <view class="achievement-info">
           <text class="achievement-name">{{achievement.name}}</text>
           <text class="achievement-desc">{{achievement.description}}</text>
-          <text class="achievement-time" wx:if="{{achievement.is_unlocked}}">{{formatDate(achievement.unlocked_at)}}</text>
         </view>
         <view class="achievement-status">
-          <van-icon name="{{achievement.is_unlocked ? 'success' : 'lock'}}" size="20px" color="{{achievement.is_unlocked ? '#4CAF50' : '#CCC'}}"/>
+          <van-icon name="{{achievement.unlocked ? 'success' : 'lock'}}" size="20px" color="{{achievement.unlocked ? '#4CAF50' : '#CCC'}}"/>
         </view>
       </view>
     </view>

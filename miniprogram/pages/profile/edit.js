@@ -35,20 +35,20 @@ Page({
 
   async loadUser() {
     try {
-      const user = await request({ url: '/user/profile' });
+      const user = await request({ url: '/miniapp/user/profile' });
       if (user) {
         this.setData({
           userInfo: user,
           nickname: user.nickname || '',
           gender: user.gender || 0,
           birthday: user.birthday || '',
-          height: user.height_cm ? String(user.height_cm) : '',
-          weight: user.current_weight_kg ? String(user.current_weight_kg) : '',
-          targetWeight: user.target_weight_kg ? String(user.target_weight_kg) : '',
-          fitnessGoal: user.fitness_goal || '',
-          fitnessLevel: user.fitness_level || 'beginner',
-          workoutDays: user.workout_days_per_week || 3,
-          workoutDuration: user.workout_duration_min || 45
+          height: user.heightCm ? String(user.heightCm) : '',
+          weight: user.currentWeightKg ? String(user.currentWeightKg) : '',
+          targetWeight: user.targetWeightKg ? String(user.targetWeightKg) : '',
+          fitnessGoal: user.fitnessGoal || '',
+          fitnessLevel: user.fitnessLevel || 'beginner',
+          workoutDays: user.workoutDaysPerWeek || 3,
+          workoutDuration: user.workoutDurationMin || 45
         });
       }
     } catch (err) {
@@ -67,17 +67,21 @@ Page({
   onShowDatePicker() { this.setData({ showDatePicker: true }); },
 
   onGoalConfirm(e) {
-    const { value } = e.detail;
+    const value = e.currentTarget.dataset.value;
     this.setData({ fitnessGoal: value, showGoalPicker: false });
   },
 
   onLevelConfirm(e) {
-    const { value } = e.detail;
+    const value = e.currentTarget.dataset.value;
     this.setData({ fitnessLevel: value, showLevelPicker: false });
   },
 
+  onGenderRadioChange(e) {
+    this.setData({ gender: e.detail });
+  },
+
   onGenderConfirm(e) {
-    const { value } = e.detail;
+    const value = e.currentTarget.dataset.value;
     this.setData({ gender: value, showGenderPicker: false });
   },
 
@@ -113,7 +117,7 @@ Page({
     try {
       await requestWithLoading({
         method: 'PUT',
-        url: '/user/profile',
+        url: '/miniapp/user/profile',
         data: {
           nickname: nickname.trim(),
           gender,

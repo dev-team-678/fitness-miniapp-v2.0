@@ -19,8 +19,8 @@ Page({
   async loadPRList() {
     this.setData({ loading: true });
     try {
-      const res = await request({ url: '/pr-record/list' });
-      this.setData({ prList: res.list || [] });
+      const res = await request({ url: '/miniapp/workout/pr-records' });
+      this.setData({ prList: res || [] });
     } catch (err) {
       showToast('加载失败');
     } finally {

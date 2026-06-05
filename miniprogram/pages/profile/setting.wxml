@@ -1,0 +1,70 @@
+<view class="container">
+  <!-- 训练提醒 -->
+  <view class="card">
+    <view class="section-title">⏰ 训练提醒</view>
+    <van-cell-group>
+      <van-cell title="开启提醒" label="每天定时提醒你训练">
+        <van-switch slot="right-icon" checked="{{reminderEnabled}}" bind:change="onReminderToggle" active-color="#FF6B35" />
+      </van-cell>
+      <van-cell title="提醒时间" value="{{reminderTime}}" is-link bindtap="onShowTimePicker" />
+    </van-cell-group>
+  </view>
+
+  <!-- 意见反馈 -->
+  <view class="card">
+    <view class="section-title">💬 意见反馈</view>
+    <van-field
+      value="{{feedbackContent}}"
+      type="textarea"
+      placeholder="请描述你遇到的问题或建议（至少5个字）"
+      maxlength="500"
+      show-word-limit
+      bindinput="onFeedbackInput"
+      custom-style="background: #F8F8F8; border-radius: 12rpx; padding: 16rpx;"
+    />
+    <view class="submit-area-inner">
+      <van-button type="primary" round block size="small"
+                  custom-style="background: #FF6B35; border: none;"
+                  bindtap="onSubmitFeedback">提交反馈</van-button>
+    </view>
+  </view>
+
+  <!-- 通用设置 -->
+  <view class="card">
+    <view class="section-title">⚙️ 通用</view>
+    <van-cell-group>
+      <van-cell title="清除缓存" value="{{cacheSize}}" is-link bindtap="onClearCache" />
+    </van-cell-group>
+  </view>
+
+  <!-- 关于我们 -->
+  <view class="card">
+    <view class="section-title">ℹ️ 关于我们</view>
+    <view class="about-content">
+      <view class="about-logo">🏋️</view>
+      <view class="about-name">运动健身助手</view>
+      <view class="about-desc">科学训练，高效健身</view>
+      <view class="about-version">版本 {{version}}</view>
+      <view class="about-text">
+        运动健身助手是一款智能健身训练应用，提供个性化训练计划、AI健身顾问、动作库指导、训练记录追踪等功能，帮助你科学高效地达成健身目标。
+      </view>
+    </view>
+  </view>
+
+  <!-- 退出登录 -->
+  <view class="logout-area">
+    <van-button round block plain type="danger"
+                custom-style="border-color: #FF4D4F; color: #FF4D4F;"
+                bindtap="onLogout">退出登录</van-button>
+  </view>
+
+  <!-- 时间选择弹窗 -->
+  <van-popup show="{{showTimePicker}}" position="bottom" round bind:close="onTimePickerCancel">
+    <van-datetime-picker
+      type="time"
+      value="{{reminderTime}}"
+      bind:confirm="onTimeChange"
+      bind:cancel="onTimePickerCancel"
+    />
+  </van-popup>
+</view>

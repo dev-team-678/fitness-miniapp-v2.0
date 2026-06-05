@@ -57,17 +57,13 @@ Page({
     this.setData({ loading: true });
 
     try {
-      const res = await request({
-        url: '/exercise/list',
-        data: {
-          pageNum: this.data.page,
-          pageSize: 20,
-          keyword: this.data.searchKeyword || undefined,
-          bodyPartId: this.data.currentBodyPart || undefined,
-          exerciseType: this.data.currentType || undefined,
-          equipment: this.data.currentEquipment || undefined
-        }
-      });
+      const params = { pageNum: this.data.page, pageSize: 20 };
+      if (this.data.searchKeyword) params.keyword = this.data.searchKeyword;
+      if (this.data.currentBodyPart) params.bodyPartId = this.data.currentBodyPart;
+      if (this.data.currentType) params.exerciseType = this.data.currentType;
+      if (this.data.currentEquipment) params.equipment = this.data.currentEquipment;
+
+      const res = await request({ url: '/exercise/list', data: params });
 
       if (res) {
         const list = res.list || [];

@@ -27,17 +27,18 @@ Page({
   async checkFavorite(exerciseId) {
     try {
       const res = await request({
-        url: '/exercise/favorite/check',
+        url: '/miniapp/exercise/favorite/check',
         data: { exerciseId: parseInt(exerciseId) }
       });
-      this.setData({ isFavorite: !!res.isFavorite });
+      // 后端返回字段为 isFavorited
+      this.setData({ isFavorite: res.isFavorited === true });
     } catch (err) {
       console.error('检查收藏状态失败:', err);
     }
   },
 
   onPreviewImage() {
-    const url = this.data.exercise?.demo_image_url;
+    const url = this.data.exercise?.demoImageUrl;
     if (url) {
       wx.previewImage({ urls: [url], current: url });
     }
@@ -50,7 +51,7 @@ Page({
     try {
       await request({
         method: 'POST',
-        url: '/exercise/favorite',
+        url: '/miniapp/exercise/favorite',
         data: { action, exerciseId: this.data.exercise.id }
       });
       this.setData({ isFavorite: !this.data.isFavorite });

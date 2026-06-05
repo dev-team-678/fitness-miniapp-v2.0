@@ -25,7 +25,7 @@ Page({
 
       // 2. 将 code 发送到后端换取 JWT Token
       const res = await request({
-        url: '/user/login',
+        url: '/miniapp/user/login',
         method: 'POST',
         data: { code: loginRes.code }
       });

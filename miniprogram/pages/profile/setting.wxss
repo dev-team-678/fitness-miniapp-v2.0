@@ -1,0 +1,71 @@
+.container {
+  padding: 24rpx;
+  background: #F5F5FA;
+  min-height: 100vh;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 24rpx;
+}
+
+.submit-area-inner {
+  margin-top: 24rpx;
+}
+
+/* 关于我们 */
+.about-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32rpx 0;
+}
+
+.about-logo {
+  font-size: 80rpx;
+  margin-bottom: 16rpx;
+}
+
+.about-name {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.about-desc {
+  font-size: 26rpx;
+  color: #999;
+  margin-bottom: 8rpx;
+}
+
+.about-version {
+  font-size: 24rpx;
+  color: #CCC;
+  margin-bottom: 32rpx;
+}
+
+.about-text {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.6;
+  text-align: center;
+  padding: 0 16rpx;
+}
+
+/* 退出登录 */
+.logout-area {
+  margin-top: 48rpx;
+  padding: 0 16rpx;
+  padding-bottom: calc(48rpx + env(safe-area-inset-bottom));
+}

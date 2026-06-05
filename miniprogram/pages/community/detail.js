@@ -22,7 +22,7 @@ Page({
 
     try {
       const res = await request({
-        url: `/post/${this.data.postId}`
+        url: `/miniapp/post/${this.data.postId}`
       });
 
       this.setData({
@@ -85,7 +85,7 @@ Page({
     });
 
     try {
-      await request({ method: 'POST', url: '/post/like', data: { postId: this.data.postId, action } });
+      await request({ method: 'POST', url: '/miniapp/post/like', data: { postId: this.data.postId, action } });
     } catch (err) {
       this.loadDetail();
     }
@@ -114,7 +114,7 @@ Page({
     try {
       const res = await request({
         method: 'POST',
-        url: '/comment',
+        url: `/miniapp/post/${this.data.postId}/comments`,
         data: {
           postId: this.data.postId,
           content: commentText.trim(),

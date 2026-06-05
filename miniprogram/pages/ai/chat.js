@@ -1,4 +1,4 @@
-const { request, requestSSE, showToast } = require('../../utils/request');
+const { request, showToast } = require('../../utils/request');
 
 Page({
   data: {
@@ -34,14 +34,14 @@ Page({
 
     try {
       const result = await request({
-        url: `/ai-chat/${this.data.sessionId}/messages`,
+        url: `/miniapp/ai/chat/${this.data.sessionId}/messages`,
         data: { pageNum: 1, pageSize: 50 }
       });
 
       if (result && result.list) {
         const messages = result.list.map(m => ({
           ...m,
-          timeStr: this.formatTime(m.created_at)
+          timeStr: this.formatTime(m.createdAt)
         }));
         this.setData({ messages });
         this.scrollToBottom();
@@ -90,67 +90,32 @@ Page({
     this.scrollToBottom();
 
     try {
-      let assistantContent = '';
-      const assistantMsg = {
-        id: Date.now() + 1,
-        role: 'assistant',
-        content: '',
-        timeStr: this.formatTime(new Date())
-      };
-
-      this.setData({
-        messages: [...this.data.messages, assistantMsg]
-      });
-
-      await requestSSE({
-        url: '/ai-chat/send',
+      const res = await request({
+        url: '/miniapp/ai/chat/send',
+        method: 'POST',
         data: {
           message: text,
-          sessionId: this.data.sessionId,
-          sessionType: 'chat'
-        },
-        onMessage: (chunk) => {
-          // 解析 SSE data 行
-          const lines = chunk.split('\n');
-          for (const line of lines) {
-            if (line.startsWith('data: ')) {
-              const jsonStr = line.substring(6).trim();
-              if (jsonStr === '[DONE]') continue;
-              try {
-                const parsed = JSON.parse(jsonStr);
-                if (parsed.sessionId && !this.data.sessionId) {
-                  this.setData({ sessionId: parsed.sessionId });
-                }
-                if (parsed.content) {
-                  assistantContent += parsed.content;
-                  const msgs = [...this.data.messages];
-                  const lastIdx = msgs.length - 1;
-                  msgs[lastIdx] = { ...msgs[lastIdx], content: assistantContent };
-                  this.setData({ messages: msgs });
-                  this.scrollToBottom();
-                }
-              } catch (e) {
-                // 非 JSON，当作纯文本追加
-                assistantContent += jsonStr;
-                const msgs = [...this.data.messages];
-                const lastIdx = msgs.length - 1;
-                msgs[lastIdx] = { ...msgs[lastIdx], content: assistantContent };
-                this.setData({ messages: msgs });
-                this.scrollToBottom();
-              }
-            }
-          }
-        },
-        onComplete: () => {
-          this.setData({ loading: false });
+          sessionId: this.data.sessionId
         }
       });
+
+      if (res) {
+        if (res.sessionId && !this.data.sessionId) {
+          this.setData({ sessionId: res.sessionId });
+        }
+        const assistantMsg = {
+          id: res.messageId || Date.now() + 1,
+          role: 'assistant',
+          content: res.content || '',
+          timeStr: this.formatTime(new Date().toISOString())
+        };
+        this.setData({
+          messages: [...this.data.messages, assistantMsg]
+        });
+        this.scrollToBottom();
+      }
     } catch (err) {
       showToast(err.message || '发送失败');
-      const failedMsg = this.data.messages.find(m => m.id === userMsg.id);
-      if (failedMsg) {
-        failedMsg.content = '发送失败，请重试';
-      }
     } finally {
       this.setData({ loading: false });
     }

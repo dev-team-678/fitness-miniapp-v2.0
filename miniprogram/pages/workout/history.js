@@ -41,7 +41,7 @@ Page({
 
     try {
       const res = await request({
-        url: '/workout/history',
+        url: '/miniapp/workout/history',
         data: {
           pageNum: this.data.page,
           pageSize: 20,
@@ -53,10 +53,10 @@ Page({
         const list = res.list || [];
         const formatted = list.map(item => ({
           ...item,
-          dateStr: util.formatDate(new Date(item.workout_date)),
-          durationStr: item.duration_min ? `${Math.round(item.duration_min / 60)}分钟` : '-',
-          volumeStr: item.total_volume_kg ? `${Math.round(item.total_volume_kg)}kg` : '-',
-          dayOfWeek: util.getWeekdayShort(new Date(item.workout_date))
+          dateStr: util.formatDate(new Date(item.workoutDate)),
+          durationStr: item.durationMin ? `${Math.round(item.durationMin / 60)}分钟` : '-',
+          volumeStr: item.totalVolumeKg ? `${Math.round(item.totalVolumeKg)}kg` : '-',
+          dayOfWeek: util.getWeekdayShort(new Date(item.workoutDate))
         }));
 
         const newList = this.data.page === 1 ? formatted : [...this.data.list, ...formatted];
@@ -64,7 +64,7 @@ Page({
         // 计算月度统计
         const now = new Date();
         const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
-        const monthItems = newList.filter(item => new Date(item.workout_date) >= monthStart);
+        const monthItems = newList.filter(item => new Date(item.workoutDate) >= monthStart);
 
         this.setData({
           list: newList,
@@ -72,8 +72,8 @@ Page({
           page: this.data.page + 1,
           monthStats: {
             count: monthItems.length,
-            duration: Math.round(monthItems.reduce((sum, item) => sum + (item.duration_min || 0), 0) / 60),
-            volume: Math.round(monthItems.reduce((sum, item) => sum + (item.total_volume_kg || 0), 0))
+            duration: Math.round(monthItems.reduce((sum, item) => sum + (item.durationMin || 0), 0) / 60),
+            volume: Math.round(monthItems.reduce((sum, item) => sum + (item.totalVolumeKg || 0), 0))
           },
           loading: false
         });
@@ -86,7 +86,24 @@ Page({
 
   onTapItem(e) {
     const { id } = e.currentTarget.dataset;
-    // 可以跳转到详情页，这里简化
-    wx.showToast({ title: '训练详情', icon: 'none' });
+    const item = this.data.list.find(i => i.id === id);
+    if (!item) return;
+
+    const data = {
+      duration: item.durationStr || '-',
+      totalSets: item.totalSets || 0,
+      totalVolume: Math.round(item.totalVolumeKg || 0),
+      exerciseCount: item.exerciseCount || 0,
+      feelingScore: item.feelingScore || 3,
+      calories: item.estimatedCalories || 0
+    };
+
+    wx.navigateTo({
+      url: `/pages/workout/summary?data=${encodeURIComponent(JSON.stringify(data))}`
+    });
+  },
+
+  goPlanList() {
+    wx.navigateTo({ url: '/pages/plan/list' });
   }
 });

@@ -42,7 +42,7 @@ Page({
 
     try {
       const res = await request({
-        url: '/ai/chat/sessions',
+        url: '/miniapp/ai/chat/sessions',
         data: {
           pageNum: this.data.pageNum,
           pageSize: this.data.pageSize

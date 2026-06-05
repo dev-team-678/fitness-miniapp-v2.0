@@ -35,24 +35,24 @@
         </view>
         <view class="item-stat">
           <text class="item-stat-icon">🏋️</text>
-          <text class="item-stat-value">{{item.total_sets || 0}}组</text>
+          <text class="item-stat-value">{{item.totalSets || 0}}组</text>
         </view>
         <view class="item-stat">
           <text class="item-stat-icon">📊</text>
           <text class="item-stat-value">{{item.volumeStr}}</text>
         </view>
-        <view class="item-stat" wx:if="{{item.estimated_calories}}">
+        <view class="item-stat" wx:if="{{item.estimatedCalories}}">
           <text class="item-stat-icon">🔥</text>
-          <text class="item-stat-value">{{item.estimated_calories}}kcal</text>
+          <text class="item-stat-value">{{item.estimatedCalories}}kcal</text>
         </view>
       </view>
-      <view class="item-feeling" wx:if="{{item.feeling_score}}">
+      <view class="item-feeling" wx:if="{{item.feelingScore}}">
         <text>训练感受：</text>
-        <text wx:if="{{item.feeling_score === 1}}">😊 很轻松</text>
-        <text wx:elif="{{item.feeling_score === 2}}">🙂 轻松</text>
-        <text wx:elif="{{item.feeling_score === 3}}">😐 适中</text>
-        <text wx:elif="{{item.feeling_score === 4}}">😤 吃力</text>
-        <text wx:elif="{{item.feeling_score === 5}}">🤯 力竭</text>
+        <text wx:if="{{item.feelingScore === 1}}">😊 很轻松</text>
+        <text wx:elif="{{item.feelingScore === 2}}">🙂 轻松</text>
+        <text wx:elif="{{item.feelingScore === 3}}">😐 适中</text>
+        <text wx:elif="{{item.feelingScore === 4}}">😤 吃力</text>
+        <text wx:elif="{{item.feelingScore === 5}}">🤯 力竭</text>
       </view>
     </view>
   </view>

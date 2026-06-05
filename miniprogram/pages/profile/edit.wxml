@@ -12,6 +12,40 @@
     </van-cell-group>
   </view>
 
+  <!-- 日期选择弹窗 -->
+  <van-popup show="{{showDatePicker}}" position="bottom" bind:close="onPickerCancel">
+    <van-datetime-picker
+      type="date"
+      value="{{currentDate}}"
+      min-date="{{minDate}}"
+      max-date="{{maxDate}}"
+      bind:confirm="onDateConfirm"
+      bind:cancel="onPickerCancel"
+    />
+  </van-popup>
+
+  <!-- 性别选择弹窗 -->
+  <van-popup show="{{showGenderPicker}}" position="bottom" round bind:close="onPickerCancel">
+    <view class="picker-container">
+      <view class="picker-header">
+        <text class="picker-cancel" bindtap="onPickerCancel">取消</text>
+        <text class="picker-title">选择性别</text>
+        <text class="picker-confirm"></text>
+      </view>
+      <view class="picker-body">
+        <van-radio-group value="{{gender}}" bind:change="onGenderRadioChange">
+          <van-cell-group>
+            <van-cell wx:for="{{genderOptions}}" wx:key="value"
+                      title="{{item.label}}" clickable
+                      bindtap="onGenderConfirm" data-value="{{item.value}}">
+              <van-radio name="{{item.value}}" />
+            </van-cell>
+          </van-cell-group>
+        </van-radio-group>
+      </view>
+    </view>
+  </van-popup>
+
   <!-- 身体数据 -->
   <view class="card">
     <view class="section-title">📏 身体数据</view>

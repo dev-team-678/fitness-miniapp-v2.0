@@ -67,6 +67,12 @@
   color: #1A1A2E;
 }
 
+.plan-day-label {
+  font-size: 28rpx;
+  color: #FF6B35;
+  margin-top: 8rpx;
+}
+
 .plan-exercises {
   margin-bottom: 24rpx;
 }

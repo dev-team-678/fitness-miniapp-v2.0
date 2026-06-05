@@ -38,9 +38,12 @@
 .metric-tab.active { background: rgba(255,107,53,0.1); color: #FF6B35; font-weight: 600; }
 .chart-card { padding: 32rpx; }
 .chart-area { width: 100%; overflow: hidden; }
-.chart-svg { width: 100%; height: 300rpx; }
+.chart-canvas { width: 100%; height: 300rpx; }
 .chart-labels { display: flex; justify-content: space-between; padding: 8rpx 40rpx 0; }
 .chart-labels text { font-size: 20rpx; color: #999; }
+.chart-values { display: flex; justify-content: space-between; padding: 8rpx 40rpx 0; flex-wrap: wrap; }
+.chart-value-dot { font-size: 20rpx; color: #FF6B35; margin-right: 10rpx; }
+.chart-value-dot .dot { font-size: 16rpx; margin-right: 4rpx; }
 .history-card { padding: 32rpx; }
 .record-row { display: flex; justify-content: space-between; align-items: center; padding: 16rpx 0; border-bottom: 1rpx solid #F5F5FA; }
 .record-date { font-size: 28rpx; color: #333; }

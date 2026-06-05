@@ -46,7 +46,7 @@ Page({
     this.setData({ loading: true });
 
     try {
-      const url = this.data.tab === 'my' ? '/post/my' : '/post/list';
+      const url = this.data.tab === 'my' ? '/miniapp/post/my' : '/miniapp/post/list';
       const res = await request({
         url,
         data: {
@@ -96,7 +96,7 @@ Page({
     this.setData({ posts });
 
     try {
-      await request({ method: 'POST', url: '/post/like', data: { postId, action } });
+      await request({ method: 'POST', url: '/miniapp/post/like', data: { postId, action } });
     } catch (err) {
       this.setData({ posts: this.data.posts.map(p => p) });
     }

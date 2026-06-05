@@ -23,8 +23,8 @@ Page({
   async loadFavorites() {
     this.setData({ loading: true });
     try {
-      const res = await request({ url: '/exercise/favorite/list' });
-      this.setData({ favorites: res.list || [] });
+      const res = await request({ url: '/miniapp/exercise/favorite/list' });
+      this.setData({ favorites: res || [] });
     } catch (err) {
       showToast('加载失败');
     } finally {
@@ -42,7 +42,7 @@ Page({
     try {
       await request({
         method: 'POST',
-        url: '/exercise/favorite',
+        url: '/miniapp/exercise/favorite',
         data: { action: 'remove', exerciseId: id }
       });
       showToast('已取消收藏');

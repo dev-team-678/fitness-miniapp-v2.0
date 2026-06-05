@@ -13,3 +13,11 @@
 .pref-row { display: flex; justify-content: space-between; align-items: center; padding: 16rpx 32rpx; }
 .pref-label { font-size: 28rpx; color: #333; }
 .submit-area { position: fixed; bottom: 0; left: 0; right: 0; padding: 24rpx 32rpx; padding-bottom: calc(24rpx + env(safe-area-inset-bottom)); background: #F5F5FA; }
+
+/* Picker 样式 */
+.picker-container { padding-bottom: env(safe-area-inset-bottom); }
+.picker-header { display: flex; justify-content: space-between; align-items: center; padding: 24rpx 32rpx; border-bottom: 1rpx solid #eee; }
+.picker-cancel { font-size: 28rpx; color: #999; }
+.picker-title { font-size: 32rpx; font-weight: 600; color: #333; }
+.picker-confirm { font-size: 28rpx; color: #FF6B35; }
+.picker-body { max-height: 600rpx; overflow-y: auto; }

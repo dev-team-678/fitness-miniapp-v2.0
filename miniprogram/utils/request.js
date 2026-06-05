@@ -3,7 +3,7 @@
  * 替代原有云函数 callFunction 调用方式
  */
 
-const BASE_URL = 'http://118.25.55.203/api/v1';
+const BASE_URL = 'https://tech-vance.cn/api/v1';
 
 // Token 管理
 const tokenManager = {
@@ -76,55 +76,26 @@ function request(options) {
 }
 
 /**
- * Token 过期处理 - 自动刷新
+ * Token 过期处理 - 直接跳转登录
  */
 function handleTokenExpired(options, resolve, reject) {
+  // 防止重复处理
   if (isRefreshing) {
-    requestQueue.push({ options, resolve, reject });
-    return;
-  }
-
-  isRefreshing = true;
-  const refreshToken = tokenManager.getRefreshToken();
-
-  if (!refreshToken) {
-    isRefreshing = false;
-    tokenManager.removeToken();
-    wx.redirectTo({ url: '/pages/login/index' });
     reject(new Error('登录已过期'));
     return;
   }
 
-  wx.request({
-    url: `${BASE_URL}/auth/refresh`,
-    method: 'POST',
-    header: { 'Authorization': `Bearer ${refreshToken}` },
-    success(res) {
-      if (res.data && res.data.code === 200) {
-        tokenManager.setToken(res.data.data.token);
-        if (res.data.data.refreshToken) {
-          tokenManager.setRefreshToken(res.data.data.refreshToken);
-        }
-        request(options).then(resolve).catch(reject);
-        requestQueue.forEach(item => {
-          request(item.options).then(item.resolve).catch(item.reject);
-        });
-      } else {
-        tokenManager.removeToken();
-        wx.redirectTo({ url: '/pages/login/index' });
-        reject(new Error('登录已过期'));
-      }
-    },
-    fail() {
-      tokenManager.removeToken();
-      wx.redirectTo({ url: '/pages/login/index' });
-      reject(new Error('登录已过期'));
-    },
-    complete() {
-      isRefreshing = false;
-      requestQueue = [];
-    }
-  });
+  isRefreshing = true;
+  tokenManager.removeToken();
+
+  // 跳转登录页面
+  wx.redirectTo({ url: '/pages/login/index' });
+  reject(new Error('登录已过期'));
+
+  // 重置标志
+  setTimeout(() => {
+    isRefreshing = false;
+  }, 1000);
 }
 
 /**

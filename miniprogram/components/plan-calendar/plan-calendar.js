@@ -57,21 +57,21 @@ Component({
     },
 
     // 处理计划数据
-    processPlanData(data) {
-      const { plan, days } = data;
-      const durationWeeks = plan.duration_weeks;
-      
+    processPlanData(planData) {
+      const durationWeeks = planData.durationWeeks;
+      const days = planData.days || [];
+
       // 生成周数据
       const weeks = [];
       for (let w = 1; w <= durationWeeks; w++) {
         const weekDays = [];
         for (let d = 1; d <= 7; d++) {
           // 查找对应的计划日
-          const planDay = days.find(day => day.week_number === w && day.day_of_week === d);
+          const planDay = days.find(day => day.weekNumber === w && day.dayOfWeek === d);
           weekDays.push({
             dayOfWeek: d,
-            isRestDay: planDay ? planDay.is_rest_day === 1 : true,
-            dayLabel: planDay ? planDay.day_label : '休息日',
+            isRestDay: planDay ? (!planDay.exercises || planDay.exercises.length === 0) : true,
+            dayLabel: planDay ? (planDay.dayLabel || planDay.description || '训练日') : '休息日',
             exercises: planDay ? planDay.exercises || [] : [],
             completed: false // 后续从打卡记录获取
           });
@@ -90,12 +90,14 @@ Component({
     updateCurrentWeek() {
       const currentWeek = this.data.currentWeek;
       const weekData = this.data.weeks.find(w => w.weekNumber === currentWeek);
-      this.setData({ currentWeekData: weekData });
+      if (weekData) {
+        this.setData({ currentWeekData: weekData });
+      }
     },
 
     // 周切换
     onWeekChange(e) {
-      const week = e.detail;
+      const week = Number(e.detail.value) + 1;
       this.setData({ currentWeek: week }, () => {
         this.updateCurrentWeek();
       });

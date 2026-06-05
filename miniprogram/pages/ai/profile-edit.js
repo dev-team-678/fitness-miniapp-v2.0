@@ -39,7 +39,7 @@ Page({
 
   async loadProfile() {
     try {
-      const result = await request({ url: '/fitness-profile' });
+      const result = await request({ url: '/miniapp/user/fitness-profile' });
 
       if (result && result.profile) {
         const profile = result.profile;
@@ -143,7 +143,7 @@ Page({
 
       await request({
         method: 'PUT',
-        url: '/fitness-profile',
+        url: '/miniapp/user/fitness-profile',
         data: {
           fitnessLevel: this.data.fitnessLevel,
           primaryGoal: this.data.primaryGoal,

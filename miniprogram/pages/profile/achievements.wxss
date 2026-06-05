@@ -83,6 +83,13 @@
   flex-shrink: 0;
 }
 
+.achievement-icon-img {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
 .achievement-item.unlocked .achievement-icon {
   background: #FF6B35;
 }

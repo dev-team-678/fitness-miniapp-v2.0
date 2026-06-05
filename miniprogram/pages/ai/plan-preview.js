@@ -22,7 +22,7 @@ Page({
   async loadPlanDetail() {
     this.setData({ loading: true });
     try {
-      const plan = await request({ url: `/ai/plan/${this.data.aiPlanId}` });
+      const plan = await request({ url: `/miniapp/ai/plan/${this.data.aiPlanId}` });
 
       const goalMap = {
         lose_fat: '减脂', gain_muscle: '增肌',
@@ -71,7 +71,7 @@ Page({
           try {
             showLoading('保存计划...');
             const result = await request({
-              url: `/ai/plan/${this.data.aiPlanId}/confirm`,
+              url: `/miniapp/ai/plan/${this.data.aiPlanId}/confirm`,
               method: 'POST'
             });
             hideLoading();

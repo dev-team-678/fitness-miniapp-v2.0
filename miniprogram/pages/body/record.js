@@ -29,6 +29,23 @@ Page({
       pickerDate: now.getTime(),
       maxDate: now.getTime()
     });
+    this.loadUserInfo();
+  },
+
+  async loadUserInfo() {
+    try {
+      // 优先使用 globalData 中的用户信息
+      if (getApp().globalData.userInfo?.heightCm) {
+        return;
+      }
+      // 如果没有，重新获取
+      const user = await request({ url: '/miniapp/user/profile' });
+      if (user) {
+        getApp().globalData.userInfo = user;
+      }
+    } catch (err) {
+      console.error('获取用户信息失败:', err);
+    }
   },
 
   onShowDatePicker() {
@@ -52,10 +69,14 @@ Page({
     const weight = e.detail;
     this.setData({ weight });
     // 自动计算 BMI
-    if (weight && getApp().globalData.userInfo?.height_cm) {
-      const heightM = getApp().globalData.userInfo.height_cm / 100;
+    const heightCm = getApp().globalData.userInfo?.heightCm;
+    if (weight && heightCm) {
+      const heightM = parseFloat(heightCm) / 100;
       const bmi = (parseFloat(weight) / (heightM * heightM)).toFixed(1);
       this.setData({ bmi });
+    } else if (weight && !heightCm) {
+      this.setData({ bmi: '' });
+      wx.showToast({ title: '请先在个人资料中设置身高', icon: 'none' });
     }
   },
 
@@ -86,7 +107,7 @@ Page({
     try {
       await requestWithLoading({
         method: 'POST',
-        url: '/body/record',
+        url: '/miniapp/body/record',
         data: {
           recordDate,
           weightKg: parseFloat(weight) || null,
