@@ -153,24 +153,24 @@ function requestSSE(options) {
 }
 
 /**
- * 文件上传 - 获取COS预签名URL并上传
+ * 文件上传 - 获取七牛云上传凭证并直传
  * @param {String} filePath - 本地文件路径
  * @param {String} dir - 存储目录
  * @returns {Promise<String>} fileUrl
  */
 async function uploadFile(filePath, dir = 'media') {
   const fileName = filePath.split('/').pop();
-  const { uploadUrl, fileUrl } = await request({
+  const { uploadToken, key, uploadDomain, fileUrl } = await request({
     url: '/upload/media',
     data: { filename: fileName, dir }
   });
 
   await new Promise((resolve, reject) => {
     wx.uploadFile({
-      url: uploadUrl,
+      url: uploadDomain,
       filePath: filePath,
       name: 'file',
-      header: { 'Content-Type': 'image/jpeg' },
+      formData: { token: uploadToken, key: key },
       success: resolve,
       fail: reject
     });
