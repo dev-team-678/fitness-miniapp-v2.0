@@ -60,7 +60,7 @@ Page({
   // 加载身体部位
   async loadBodyParts() {
     try {
-      const result = await request({ url: '/exercise/body-parts' });
+      const result = await request({ url: '/body-part/list' });
       this.setData({ bodyParts: result || [] });
     } catch (err) {
       console.error('加载身体部位失败:', err);
@@ -181,7 +181,7 @@ Page({
     days[dayIndex].exercises.push({
       exerciseId: this.data.currentExercise.id,
       name: this.data.currentExercise.name,
-      demoImageUrl: this.data.currentExercise.demo_image_url,
+      demoImageUrl: this.data.currentExercise.demoImageUrl,
       sets: parseInt(this.data.exerciseSets),
       reps: this.data.exerciseReps,
       restSec: parseInt(this.data.exerciseRest)

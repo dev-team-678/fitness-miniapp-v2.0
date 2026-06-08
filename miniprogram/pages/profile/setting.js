@@ -113,10 +113,12 @@ Page({
       confirmColor: '#FF6B35',
       success: (res) => {
         if (res.confirm) {
-          const token = wx.getStorageSync('token');
+          const token = wx.getStorageSync('jwt_token');
+          const refreshToken = wx.getStorageSync('refresh_token');
           const reminder = wx.getStorageSync('workout_reminder');
           wx.clearStorageSync();
-          if (token) wx.setStorageSync('token', token);
+          if (token) wx.setStorageSync('jwt_token', token);
+          if (refreshToken) wx.setStorageSync('refresh_token', refreshToken);
           if (reminder) wx.setStorageSync('workout_reminder', reminder);
           this.calcCacheSize();
           showToast('缓存已清除');
@@ -166,7 +168,8 @@ Page({
       confirmColor: '#FF6B35',
       success: (res) => {
         if (res.confirm) {
-          wx.removeStorageSync('token');
+          wx.removeStorageSync('jwt_token');
+          wx.removeStorageSync('refresh_token');
           wx.removeStorageSync('userInfo');
           wx.reLaunch({ url: '/pages/login/index' });
         }

@@ -81,8 +81,8 @@ Page({
   async onLike(e) {
     const postId = e.currentTarget.dataset.id;
     const isLiked = e.currentTarget.dataset.liked;
-    const action = isLiked ? 'unlike' : 'like';
 
+    // 乐观更新
     const posts = this.data.posts.map(p => {
       if (p.id === postId) {
         return {
@@ -96,8 +96,19 @@ Page({
     this.setData({ posts });
 
     try {
-      await request({ method: 'POST', url: '/miniapp/post/like', data: { postId, action } });
+      const res = await request({ method: 'POST', url: '/miniapp/post/like', data: { postId } });
+      // 后端返回 { liked: true/false, likeCount: N }，用后端结果修正
+      if (res) {
+        const correctedPosts = this.data.posts.map(p => {
+          if (p.id === postId) {
+            return { ...p, isLiked: res.liked, likeCount: res.likeCount };
+          }
+          return p;
+        });
+        this.setData({ posts: correctedPosts });
+      }
     } catch (err) {
+      // 回滚
       this.setData({ posts: this.data.posts.map(p => p) });
     }
   },

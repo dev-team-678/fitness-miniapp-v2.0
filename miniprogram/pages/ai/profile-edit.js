@@ -41,36 +41,29 @@ Page({
     try {
       const result = await request({ url: '/miniapp/user/fitness-profile' });
 
-      if (result && result.profile) {
-        const profile = result.profile;
-
-        this.setData({
-          fitnessLevel: profile.fitness_level || 'beginner',
-          primaryGoal: profile.primary_goal || 'gain_muscle',
-          weeklyAvailableDays: profile.weekly_available_days || 3,
-          preferredDuration: String(profile.preferred_workout_duration || 60)
-        });
-
-        if (profile.available_equipment && Array.isArray(profile.available_equipment)) {
+      if (result) {
+        // 后端返回 camelCase 字段: injuries, allergies, availableEquipment,
+        // preferredWorkoutTime, trainingPreferences, healthConditions, aiNotes
+        if (result.availableEquipment && Array.isArray(result.availableEquipment)) {
           const equipmentOptions = this.data.equipmentOptions.map(e => ({
             ...e,
-            selected: profile.available_equipment.includes(e.name)
+            selected: result.availableEquipment.includes(e.name)
           }));
           this.setData({ equipmentOptions });
         }
 
-        if (profile.injury_history && Array.isArray(profile.injury_history)) {
+        if (result.injuries && Array.isArray(result.injuries)) {
           const injuryOptions = this.data.injuryOptions.map(i => ({
             ...i,
-            selected: profile.injury_history.includes(i.name)
+            selected: result.injuries.includes(i.name) || result.injuries.includes(i.label)
           }));
           this.setData({ injuryOptions });
         }
 
-        if (profile.health_conditions && Array.isArray(profile.health_conditions)) {
+        if (result.healthConditions && Array.isArray(result.healthConditions)) {
           const healthOptions = this.data.healthOptions.map(h => ({
             ...h,
-            selected: profile.health_conditions.includes(h.name)
+            selected: result.healthConditions.includes(h.name) || result.healthConditions.includes(h.label)
           }));
           this.setData({ healthOptions });
         }
@@ -129,12 +122,12 @@ Page({
         .filter(e => e.selected)
         .map(e => e.name);
 
-      const injuryHistory = this.data.injuryOptions
+      const injuries = this.data.injuryOptions
         .filter(i => i.selected)
         .map(i => i.name);
 
       if (this.data.customInjury.trim()) {
-        injuryHistory.push(this.data.customInjury.trim());
+        injuries.push(this.data.customInjury.trim());
       }
 
       const healthConditions = this.data.healthOptions
@@ -145,12 +138,8 @@ Page({
         method: 'PUT',
         url: '/miniapp/user/fitness-profile',
         data: {
-          fitnessLevel: this.data.fitnessLevel,
-          primaryGoal: this.data.primaryGoal,
-          weeklyAvailableDays: this.data.weeklyAvailableDays,
-          preferredWorkoutDuration: parseInt(this.data.preferredDuration),
+          injuries,
           availableEquipment,
-          injuryHistory,
           healthConditions
         }
       });

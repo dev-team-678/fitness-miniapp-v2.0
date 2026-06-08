@@ -28,25 +28,25 @@
 
   <!-- 动作列表横向切换 -->
   <scroll-view class="exercise-tabs" scroll-x="{{true}}" wx:if="{{exercises.length > 0}}">
-    <view class="exercise-tab {{index === currentExerciseIndex ? 'active' : ''}} {{item.sets_data.length >= item.target_sets ? 'done' : ''}}"
-          wx:for="{{exercises}}" wx:key="exercise_id"
+    <view class="exercise-tab {{index === currentExerciseIndex ? 'active' : ''}} {{item.setsData.length >= item.targetSets ? 'done' : ''}}"
+          wx:for="{{exercises}}" wx:key="logExerciseId"
           bindtap="onExerciseChange" data-index="{{index}}">
-      <text class="tab-name">{{item.exercise_name}}</text>
-      <text class="tab-count">{{item.sets_data.length || 0}}/{{item.target_sets}}</text>
+      <text class="tab-name">{{item.exerciseName}}</text>
+      <text class="tab-count">{{item.setsData.length || 0}}/{{item.targetSets}}</text>
     </view>
   </scroll-view>
 
   <!-- 当前动作详情 -->
   <view class="current-exercise" wx:if="{{exercises.length > 0}}">
     <view class="exercise-header">
-      <text class="exercise-name">{{exercises[currentExerciseIndex].exercise_name}}</text>
+      <text class="exercise-name">{{exercises[currentExerciseIndex].exerciseName}}</text>
       <view class="exercise-target">
-        目标: {{exercises[currentExerciseIndex].target_sets}}组 × {{exercises[currentExerciseIndex].target_reps}}
+        目标: {{exercises[currentExerciseIndex].targetSets}}组 × {{exercises[currentExerciseIndex].targetReps}}
       </view>
     </view>
 
     <!-- 已完成组列表 -->
-    <view class="sets-list" wx:if="{{exercises[currentExerciseIndex].sets_data.length > 0}}">
+    <view class="sets-list" wx:if="{{exercises[currentExerciseIndex].setsData.length > 0}}">
       <view class="sets-header">
         <text class="set-col">组</text>
         <text class="set-col">重量</text>
@@ -54,14 +54,14 @@
         <text class="set-col">类型</text>
       </view>
       <view class="set-row {{index === currentSetIndex - 1 ? 'latest' : ''}}"
-            wx:for="{{exercises[currentExerciseIndex].sets_data}}" wx:key="set_number">
-        <text class="set-col set-num">{{item.set_number}}</text>
-        <text class="set-col">{{item.weight_kg}}kg</text>
+            wx:for="{{exercises[currentExerciseIndex].setsData}}" wx:key="setNumber">
+        <text class="set-col set-num">{{item.setNumber}}</text>
+        <text class="set-col">{{item.weightKg}}kg</text>
         <text class="set-col">{{item.reps}}</text>
         <text class="set-col">
-          <van-tag type="primary" size="mini" wx:if="{{item.set_type === 'warmup'}}">热身</van-tag>
-          <van-tag type="warning" size="mini" wx:elif="{{item.set_type === 'dropset'}}">递减</van-tag>
-          <van-tag type="danger" size="mini" wx:elif="{{item.set_type === 'failure'}}">力竭</van-tag>
+          <van-tag type="primary" size="mini" wx:if="{{item.setType === 'warmup'}}">热身</van-tag>
+          <van-tag type="warning" size="mini" wx:elif="{{item.setType === 'dropset'}}">递减</van-tag>
+          <van-tag type="danger" size="mini" wx:elif="{{item.setType === 'failure'}}">力竭</van-tag>
           <van-tag type="success" size="mini" wx:else>正式</van-tag>
         </text>
       </view>

@@ -25,9 +25,13 @@ Page({
         url: `/miniapp/post/${this.data.postId}`
       });
 
+      // 后端可能直接返回 post 或 { post, comments }
+      const post = res.post || res;
+      const comments = res.comments || post.comments || [];
+
       this.setData({
-        post: res.post,
-        comments: res.comments || [],
+        post,
+        comments,
         loading: false
       });
     } catch (err) {
@@ -74,7 +78,6 @@ Page({
     if (!post) return;
 
     const isLiked = post.isLiked;
-    const action = isLiked ? 'unlike' : 'like';
 
     this.setData({
       post: {
@@ -85,7 +88,12 @@ Page({
     });
 
     try {
-      await request({ method: 'POST', url: '/miniapp/post/like', data: { postId: this.data.postId, action } });
+      const res = await request({ method: 'POST', url: '/miniapp/post/like', data: { postId: this.data.postId } });
+      if (res) {
+        this.setData({
+          post: { ...this.data.post, isLiked: res.liked, likeCount: res.likeCount }
+        });
+      }
     } catch (err) {
       this.loadDetail();
     }
@@ -116,7 +124,6 @@ Page({
         method: 'POST',
         url: `/miniapp/post/${this.data.postId}/comments`,
         data: {
-          postId: this.data.postId,
           content: commentText.trim(),
           parentId: replyingTo ? replyingTo.id : null
         }

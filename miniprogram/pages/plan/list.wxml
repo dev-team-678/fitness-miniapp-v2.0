@@ -21,22 +21,22 @@
   <!-- 计划列表 -->
   <view class="plan-list" wx:if="{{plans.length > 0}}">
     <view class="plan-card card" wx:for="{{plans}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
-      <view class="plan-cover" wx:if="{{item.cover_image_url}}">
-        <image src="{{item.cover_image_url}}" mode="aspectFill"></image>
+      <view class="plan-cover" wx:if="{{item.coverImageUrl}}">
+        <image src="{{item.coverImageUrl}}" mode="aspectFill"></image>
       </view>
       <view class="plan-info">
         <view class="plan-name">{{item.name}}</view>
         <view class="plan-desc text-ellipsis-2">{{item.description}}</view>
         <view class="plan-meta">
-          <van-tag type="primary" size="medium">{{item.difficulty_level === 'beginner' ? '入门' : item.difficulty_level === 'intermediate' ? '进阶' : '高级'}}</van-tag>
-          <van-tag type="success" size="medium" wx:if="{{item.fitness_goal}}">
-            {{item.fitness_goal === 'lose_fat' ? '减脂' : item.fitness_goal === 'gain_muscle' ? '增肌' : item.fitness_goal === 'keep_fit' ? '塑形' : '耐力'}}
+          <van-tag type="primary" size="medium">{{item.difficultyLevel === 'beginner' ? '入门' : item.difficultyLevel === 'intermediate' ? '进阶' : '高级'}}</van-tag>
+          <van-tag type="success" size="medium" wx:if="{{item.fitnessGoal}}">
+            {{item.fitnessGoal === 'lose_fat' ? '减脂' : item.fitnessGoal === 'gain_muscle' ? '增肌' : item.fitnessGoal === 'keep_fit' ? '塑形' : '耐力'}}
           </van-tag>
         </view>
         <view class="plan-stats">
-          <text class="stat-item">{{item.duration_weeks}}周</text>
-          <text class="stat-item">{{item.days_per_week}}天/周</text>
-          <text class="stat-item" wx:if="{{item.avg_duration_min}}">约{{item.avg_duration_min}}分钟</text>
+          <text class="stat-item">{{item.durationWeeks}}周</text>
+          <text class="stat-item">{{item.daysPerWeek}}天/周</text>
+          <text class="stat-item" wx:if="{{item.avgDurationMin}}">约{{item.avgDurationMin}}分钟</text>
           <text class="stat-item" wx:if="{{item.exerciseCount}}">{{item.exerciseCount}}个动作</text>
         </view>
       </view>

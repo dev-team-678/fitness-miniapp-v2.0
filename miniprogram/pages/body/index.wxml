@@ -15,18 +15,18 @@
   <view class="latest-card card" wx:if="{{latestRecord}}">
     <view class="section-title">📊 最新数据</view>
     <view class="latest-grid">
-      <view class="latest-item" wx:if="{{latestRecord.weight_kg}}">
-        <text class="latest-value">{{latestRecord.weight_kg}}</text>
+      <view class="latest-item" wx:if="{{latestRecord.weightKg}}">
+        <text class="latest-value">{{latestRecord.weightKg}}</text>
         <text class="latest-unit">kg</text>
         <text class="latest-label">体重</text>
       </view>
-      <view class="latest-item" wx:if="{{latestRecord.body_fat_pct}}">
-        <text class="latest-value">{{latestRecord.body_fat_pct}}</text>
+      <view class="latest-item" wx:if="{{latestRecord.bodyFatPct}}">
+        <text class="latest-value">{{latestRecord.bodyFatPct}}</text>
         <text class="latest-unit">%</text>
         <text class="latest-label">体脂率</text>
       </view>
-      <view class="latest-item" wx:if="{{latestRecord.muscle_mass_kg}}">
-        <text class="latest-value">{{latestRecord.muscle_mass_kg}}</text>
+      <view class="latest-item" wx:if="{{latestRecord.muscleMassKg}}">
+        <text class="latest-value">{{latestRecord.muscleMassKg}}</text>
         <text class="latest-unit">kg</text>
         <text class="latest-label">肌肉量</text>
       </view>
@@ -68,10 +68,9 @@
   <!-- 记录列表 -->
   <view class="history-card card" wx:if="{{records.length > 0}}">
     <view class="section-title">📋 历史记录</view>
-    <view class="record-row" wx:for="{{records}}" wx:key="id" wx:if="{{index < 10}}">
-      <text class="record-date">{{item.dateStr}}</text>
-      <text class="record-value" wx:if="{{item.weight_kg}}">{{item.weight_kg}}kg</text>
-      <text class="record-value" wx:if="{{item.body_fat_pct}}">体脂{{item.body_fat_pct}}%</text>
+    <view class="record-row" wx:for="{{records}}" wx:key="index" wx:if="{{index < 10}}">
+      <text class="record-date">{{item.date}}</text>
+      <text class="record-value">{{item.value}}</text>
     </view>
   </view>
 

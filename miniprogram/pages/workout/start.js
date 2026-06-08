@@ -78,9 +78,9 @@ Page({
 
       const exercises = (res.exercises || []).map(ex => ({
         ...ex,
-        sets_data: [],
-        target_sets: ex.sets || 3,
-        target_reps: ex.reps || '12'
+        setsData: [],
+        targetSets: ex.sets || 3,
+        targetReps: ex.reps || '12'
       }));
 
       this.setData({
@@ -173,8 +173,7 @@ Page({
         method: 'POST',
         url: '/miniapp/workout/log-set',
         data: {
-          workoutLogId,
-          exerciseId: exercise.exercise_id,
+          logExerciseId: exercise.logExerciseId,
           setNumber,
           setType: currentSetType,
           weightKg: weight,
@@ -188,21 +187,21 @@ Page({
 
     // 更新本地数据
     const setRecord = {
-      set_number: setNumber,
-      set_type: currentSetType,
-      weight_kg: weight,
+      setNumber,
+      setType: currentSetType,
+      weightKg: weight,
       reps,
-      is_completed: true
+      isCompleted: true
     };
-    exercise.sets_data = exercise.sets_data || [];
-    exercise.sets_data.push(setRecord);
+    exercise.setsData = exercise.setsData || [];
+    exercise.setsData.push(setRecord);
 
     const newExercises = [...exercises];
     newExercises[currentExerciseIndex] = exercise;
 
-    const completedSets = newExercises.reduce((sum, ex) => sum + (ex.sets_data ? ex.sets_data.length : 0), 0);
+    const completedSets = newExercises.reduce((sum, ex) => sum + (ex.setsData ? ex.setsData.length : 0), 0);
     const totalVolume = newExercises.reduce((sum, ex) => {
-      return sum + (ex.sets_data || []).reduce((s, set) => s + (set.weight_kg || 0) * (set.reps || 0), 0);
+      return sum + (ex.setsData || []).reduce((s, set) => s + (set.weightKg || 0) * (set.reps || 0), 0);
     }, 0);
 
     this.setData({
@@ -318,24 +317,18 @@ Page({
         method: 'POST',
         url: '/miniapp/workout/complete',
         data: {
-          workoutLogId,
           feelingScore,
+          rpe: 7,
           notes
         }
       });
       hideLoading();
 
-      // 计算统计
-      const totalSets = exercises.reduce((sum, ex) => sum + (ex.sets_data ? ex.sets_data.length : 0), 0);
-      const totalVolume = exercises.reduce((sum, ex) => {
-        return sum + (ex.sets_data || []).reduce((s, set) => s + (set.weight_kg || 0) * (set.reps || 0), 0);
-      }, 0);
-
       const summaryData = {
         duration: this.data.elapsed,
-        totalSets,
-        totalVolume: Math.round(totalVolume * 100) / 100,
-        exerciseCount: exercises.filter(ex => ex.sets_data && ex.sets_data.length > 0).length,
+        totalSets: res.totalSets || 0,
+        totalVolume: res.totalVolumeKg || 0,
+        exerciseCount: exercises.filter(ex => ex.setsData && ex.setsData.length > 0).length,
         feelingScore,
         calories: res.estimatedCalories || 0
       };

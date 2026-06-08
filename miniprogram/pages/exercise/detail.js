@@ -44,17 +44,29 @@ Page({
     }
   },
 
+  onVideoPlay() {
+    console.log('视频开始播放');
+  },
+
+  onVideoPause() {
+    console.log('视频暂停');
+  },
+
+  onVideoEnded() {
+    console.log('视频播放结束');
+  },
+
   async onToggleFavorite() {
     if (!this.data.exercise) return;
     
-    const action = this.data.isFavorite ? 'remove' : 'add';
     try {
-      await request({
+      const res = await request({
         method: 'POST',
         url: '/miniapp/exercise/favorite',
-        data: { action, exerciseId: this.data.exercise.id }
+        data: { exerciseId: this.data.exercise.id }
       });
-      this.setData({ isFavorite: !this.data.isFavorite });
+      // 后端返回 { isFavorited: true/false }
+      this.setData({ isFavorite: res.isFavorited });
       showToast(this.data.isFavorite ? '已收藏' : '已取消收藏');
     } catch (err) {
       showToast('操作失败');

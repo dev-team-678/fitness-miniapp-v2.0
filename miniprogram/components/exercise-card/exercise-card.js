@@ -28,7 +28,7 @@ Component({
     'exercise': function (exercise) {
       if (!exercise) return;
       this.setData({
-        typeLabel: util.getTypeLabel(exercise.exercise_type),
+        typeLabel: util.getTypeLabel(exercise.exerciseType),
         difficultyLabel: util.getDifficultyLabel(exercise.difficulty),
         equipmentLabel: util.getEquipmentLabel(exercise.equipment)
       });

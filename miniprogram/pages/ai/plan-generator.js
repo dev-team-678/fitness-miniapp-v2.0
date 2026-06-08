@@ -70,17 +70,18 @@ Page({
         url: '/miniapp/ai/plan/generate',
         data: {
           goal: this.data.goal,
-          fitnessLevel: this.data.fitnessLevel,
+          availableEquipment,
           daysPerWeek: this.data.daysPerWeek,
-          durationWeeks: this.data.durationWeeks,
-          availableEquipment
+          bodyMetrics: {
+            level: this.data.fitnessLevel,
+            weeks: this.data.durationWeeks
+          }
         }
       });
 
       if (result) {
         this.setData({
           generatedPlan: result,
-          sessionId: result.sessionId,
           generating: false,
           planName: `${this.getGoalName(this.data.goal)}${this.data.durationWeeks}周计划`
         });
@@ -117,17 +118,7 @@ Page({
     try {
       const result = await request({
         method: 'POST',
-        url: '/miniapp/ai/plan/confirm',
-        data: {
-          aiPlanId: this.data.generatedPlan.aiPlanId,
-          planName: this.data.planName,
-          description: `${this.getGoalName(this.data.goal)}训练计划 - ${this.data.fitnessLevel}水平`,
-          difficultyLevel: this.data.fitnessLevel,
-          fitnessGoal: this.data.goal,
-          durationWeeks: this.data.durationWeeks,
-          daysPerWeek: this.data.daysPerWeek,
-          days: this.data.generatedPlan.days
-        }
+        url: `/miniapp/ai/plan/${this.data.generatedPlan.aiPlanId}/confirm`
       });
 
       hideLoading();

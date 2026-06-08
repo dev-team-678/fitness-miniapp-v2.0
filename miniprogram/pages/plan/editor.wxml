@@ -127,10 +127,10 @@
     <!-- 动作列表 -->
     <scroll-view class="exercise-select-list" scroll-y>
       <view class="exercise-select-item {{currentExercise && currentExercise.id === item.id ? 'selected' : ''}}" wx:for="{{exercises}}" wx:key="id" bindtap="selectExercise" data-item="{{item}}">
-        <image class="exercise-select-img" src="{{item.demo_image_url || '/images/exercise-default.png'}}" mode="aspectFill"/>
+        <image class="exercise-select-img" src="{{item.demoImageUrl || '/images/exercise-default.png'}}" mode="aspectFill"/>
         <view class="exercise-select-info">
           <text class="exercise-select-name">{{item.name}}</text>
-          <text class="exercise-select-type">{{item.exercise_type === 'strength' ? '力量' : '有氧'}} · {{item.equipment || '徒手'}}</text>
+          <text class="exercise-select-type">{{item.exerciseType === 'strength' ? '力量' : '有氧'}} · {{item.equipment || '徒手'}}</text>
         </view>
         <van-icon name="success" color="#FF6B35" wx:if="{{currentExercise && currentExercise.id === item.id}}"/>
       </view>

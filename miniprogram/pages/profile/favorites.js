@@ -40,13 +40,16 @@ Page({
   async removeFavorite(e) {
     const id = e.currentTarget.dataset.id;
     try {
-      await request({
+      const res = await request({
         method: 'POST',
         url: '/miniapp/exercise/favorite',
-        data: { action: 'remove', exerciseId: id }
+        data: { exerciseId: id }
       });
-      showToast('已取消收藏');
-      this.loadFavorites();
+      // 后端返回 { isFavorited: true/false }
+      if (!res.isFavorited) {
+        showToast('已取消收藏');
+        this.loadFavorites();
+      }
     } catch (err) {
       showToast('操作失败');
     }

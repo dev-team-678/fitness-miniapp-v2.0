@@ -1,5 +1,5 @@
 const { request, showToast } = require('../../utils/request');
-const { EXERCISE_TYPES, EQUIPMENT_TYPES, BODY_PARTS } = require('../../utils/constants');
+const { EXERCISE_TYPES, EQUIPMENT_TYPES } = require('../../utils/constants');
 
 Page({
   data: {
@@ -39,14 +39,8 @@ Page({
 
   async loadBodyParts() {
     try {
-      // 身体部位从云函数获取，这里用常量
-      this.setData({
-        bodyParts: [
-          { id: 1, name: '胸部' }, { id: 2, name: '背部' }, { id: 3, name: '肩部' },
-          { id: 4, name: '手臂' }, { id: 5, name: '腿部' }, { id: 6, name: '核心' },
-          { id: 7, name: '全身' }
-        ]
-      });
+      const res = await request({ url: '/category/list' });
+      this.setData({ bodyParts: res || [] });
     } catch (err) {
       console.error(err);
     }
@@ -58,8 +52,8 @@ Page({
 
     try {
       const params = { pageNum: this.data.page, pageSize: 20 };
-      if (this.data.searchKeyword) params.keyword = this.data.searchKeyword;
-      if (this.data.currentBodyPart) params.bodyPartId = this.data.currentBodyPart;
+      if (this.data.searchKeyword) params.name = this.data.searchKeyword;
+      if (this.data.currentBodyPart) params.categoryId = this.data.currentBodyPart;
       if (this.data.currentType) params.exerciseType = this.data.currentType;
       if (this.data.currentEquipment) params.equipment = this.data.currentEquipment;
 

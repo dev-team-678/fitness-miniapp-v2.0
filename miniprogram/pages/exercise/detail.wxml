@@ -1,7 +1,28 @@
 <view class="container" wx:if="{{exercise}}">
-  <!-- 演示图 -->
-  <view class="demo-area" bindtap="onPreviewImage">
-    <image wx:if="{{exercise.demoImageUrl}}" src="{{exercise.demoImageUrl}}" mode="aspectFill" class="demo-img"></image>
+  <!-- 演示视频 -->
+  <view class="demo-area">
+    <video
+      wx:if="{{exercise.demoVideoUrl}}"
+      id="demoVideo"
+      class="demo-video"
+      src="{{exercise.demoVideoUrl}}"
+      poster="{{exercise.demoImageUrl}}"
+      controls
+      autoplay="{{false}}"
+      loop
+      muted="{{false}}"
+      object-fit="cover"
+      bindplay="onVideoPlay"
+      bindpause="onVideoPause"
+      bindended="onVideoEnded"
+    ></video>
+    <image
+      wx:elif="{{exercise.demoImageUrl}}"
+      src="{{exercise.demoImageUrl}}"
+      mode="aspectFill"
+      class="demo-img"
+      bindtap="onPreviewImage"
+    ></image>
     <view wx:else class="demo-placeholder">
       <text class="demo-icon">💪</text>
     </view>
@@ -20,7 +41,7 @@
       <van-tag round wx:elif="{{exercise.difficulty === 'intermediate'}}" type="warning">进阶</van-tag>
       <van-tag round wx:elif="{{exercise.difficulty === 'advanced'}}" type="danger">高级</van-tag>
       <van-tag round wx:if="{{exercise.equipment && exercise.equipment !== 'none'}}">{{exercise.equipment}}</van-tag>
-      <van-tag round wx:if="{{exercise.isCompound}}">复合动作</van-tag>
+      <van-tag round wx:if="{{exercise.isCompound === 1 || exercise.isCompound === true}}">复合动作</van-tag>
     </view>
   </view>
 
@@ -28,9 +49,8 @@
   <view class="card" wx:if="{{exercise.bodyParts && exercise.bodyParts.length > 0}}">
     <view class="section-title">🎯 目标肌群</view>
     <view class="muscle-list">
-      <view class="muscle-item" wx:for="{{exercise.bodyParts}}" wx:key="bodyPartId">
+      <view class="muscle-item" wx:for="{{exercise.bodyParts}}" wx:key="id">
         <text class="muscle-name">{{item.name}}</text>
-        <van-tag size="mini" type="{{item.isPrimary ? 'primary' : ''}}">{{item.isPrimary ? '主要' : '辅助'}}</van-tag>
       </view>
     </view>
   </view>

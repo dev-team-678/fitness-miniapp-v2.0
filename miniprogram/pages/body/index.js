@@ -39,49 +39,34 @@ Page({
   async loadData() {
     this.setData({ loading: true });
     try {
-      // request 返回解析后的 data 对象
-      const data = await request({ url: '/miniapp/body/stats', data: { days: 90 } });
-      console.log('body-stats data:', data);
+      // 1. 获取统计数据（最新值）
+      const statsData = await request({ url: '/miniapp/body/stats' });
 
-      // 构建最新记录对象
+      // 构建最新记录对象（使用后端返回的camelCase字段）
       const latestRecord = {
-        weight_kg: data.currentWeight,
-        body_fat_pct: data.bodyFatPct,
-        bmi: data.bmi
+        weightKg: statsData.currentWeight,
+        bodyFatPct: statsData.bodyFatPct,
+        bmi: statsData.bmi
       };
 
-      // 根据当前指标获取对应趋势数据
-      let records = [];
-      const metric = this.data.currentMetric;
+      // 2. 获取趋势数据（后端 /miniapp/body/trend 接口）
+      const metricMap = {
+        weight: 'weight',
+        body_fat: 'bodyFat',
+        muscle: 'muscleMass',
+        bmi: 'bmi'
+      };
+      const trendData = await request({
+        url: '/miniapp/body/trend',
+        data: { metric: metricMap[this.data.currentMetric], days: 90 }
+      });
 
-      if (metric === 'weight' && data.weightTrend) {
-        records = data.weightTrend.map(t => ({
-          record_date: t.date,
-          weight_kg: t.value,
-          dateStr: t.date
-        }));
-        console.log('weight records:', records);
-      } else if (metric === 'body_fat' && data.fatTrend) {
-        records = data.fatTrend.map(t => ({
-          record_date: t.date,
-          body_fat_pct: t.value,
-          dateStr: t.date
-        }));
-      } else if (metric === 'muscle' && data.muscleTrend) {
-        records = data.muscleTrend.map(t => ({
-          record_date: t.date,
-          muscle_mass_kg: t.value,
-          dateStr: t.date
-        }));
-      } else if (metric === 'bmi' && data.bmiTrend) {
-        records = data.bmiTrend.map(t => ({
-          record_date: t.date,
-          bmi: t.value,
-          dateStr: t.date
-        }));
-      }
+      // 后端返回 { metric, dates: [...], values: [...] }
+      const records = (trendData && trendData.dates) ? trendData.dates.map((date, i) => ({
+        date,
+        value: trendData.values[i]
+      })) : [];
 
-      console.log('metric:', metric, 'records:', records);
       this.setData({
         records,
         latestRecord,
@@ -106,22 +91,15 @@ Page({
       return;
     }
 
-    const metricKey = this.data.currentMetric === 'body_fat' ? 'body_fat_pct' :
-                      this.data.currentMetric === 'muscle' ? 'muscle_mass_kg' :
-                      this.data.currentMetric === 'weight' ? 'weight_kg' : 'bmi';
-
-    const data = records.filter(r => r[metricKey] != null).slice(-14); // 最近14条
+    const data = records.filter(r => r.value != null).slice(-14); // 最近14条
     if (data.length === 0) {
       this.setData({ chartLabels: [], chartValues: [] });
       return;
     }
 
-    const values = data.map(d => parseFloat(d[metricKey]));
-    // 直接从 record_date 截取 MM-DD，避免 dateStr 可能的问题
-    const labels = data.map(d => d.record_date.substring(5, 10));
-
-    console.log('chart data:', data);
-    console.log('labels:', labels, 'values:', values);
+    const values = data.map(d => parseFloat(d.value));
+    // 从 date 截取 MM-DD
+    const labels = data.map(d => d.date.substring(5, 10));
 
     this.setData({
       chartLabels: labels,

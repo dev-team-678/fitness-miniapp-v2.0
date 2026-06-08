@@ -8,7 +8,7 @@
       </view>
     </view>
     <view class="header-avatar" bindtap="goProfile">
-      <image src="{{userInfo.avatar_url || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+      <image src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill"></image>
     </view>
   </view>
 
@@ -20,8 +20,8 @@
       <view class="plan-day-label" wx:if="{{todayPlan.dayLabel}}">{{todayPlan.dayLabel}}</view>
     </view>
     <view class="plan-exercises" bindtap="goPlanDetail" data-id="{{todayPlan.planId}}">
-      <view class="plan-exercise-item" wx:for="{{todayPlan.exercises}}" wx:key="exercise_id" wx:if="{{index < 4}}">
-        <text class="ex-name">{{item.exercise_name}}</text>
+      <view class="plan-exercise-item" wx:for="{{todayPlan.exercises}}" wx:key="exerciseId" wx:if="{{index < 4}}">
+        <text class="ex-name">{{item.exerciseName}}</text>
         <text class="ex-detail">{{item.sets}}×{{item.reps || '-'}}</text>
       </view>
       <view class="plan-more" wx:if="{{todayPlan.exercises.length > 4}}">
