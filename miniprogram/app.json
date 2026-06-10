@@ -1,7 +1,9 @@
 {
   "pages": [
-    "pages/login/index",
     "pages/index/index",
+    "pages/login/index",
+    "pages/login/agreement",
+    "pages/login/setup",
     "pages/plan/list",
     "pages/plan/detail",
     "pages/plan/editor",

@@ -13,7 +13,8 @@ Page({
     totalDuration: 0,
     todayCheckedIn: false,
     checkinDates: [],
-    latestAnnouncement: null
+    latestAnnouncement: null,
+    isLoggedIn: false
   },
 
   onLoad() {
@@ -22,7 +23,12 @@ Page({
   },
 
   async onShow() {
-    if (!getApp().checkLogin()) return;
+    const token = wx.getStorageSync('jwt_token');
+    const isLoggedIn = !!token;
+    this.setData({ isLoggedIn });
+
+    if (!isLoggedIn) return; // 游客模式，不加载个人数据
+
     try {
       await this.loadUserInfo();
       this.loadTodayPlan();
@@ -31,7 +37,6 @@ Page({
       this.loadLatestAnnouncement();
     } catch (err) {
       console.error('加载用户信息失败:', err);
-      // loadUserInfo 失败时停止后续请求
     }
   },
 
@@ -150,46 +155,68 @@ Page({
     }
   },
 
+  /** 检查登录状态，未登录弹出提示并跳转登录 */
+  requireLogin() {
+    if (this.data.isLoggedIn) return true;
+    wx.showModal({
+      title: '提示',
+      content: '该功能需要登录后才能使用',
+      confirmText: '去登录',
+      confirmColor: '#FF6B35',
+      success: (res) => {
+        if (res.confirm) {
+          wx.navigateTo({ url: '/pages/login/index' });
+        }
+      }
+    });
+    return false;
+  },
+
   goAIChat() {
+    if (!this.requireLogin()) return;
     wx.switchTab({ url: '/pages/ai/chat' });
   },
 
   goAIPlanGenerator() {
+    if (!this.requireLogin()) return;
     wx.navigateTo({ url: '/pages/ai/plan-generator' });
   },
 
   goAIChatHistory() {
+    if (!this.requireLogin()) return;
     wx.navigateTo({ url: '/pages/ai/chat-history' });
   },
 
   goPlanDetail(e) {
+    if (!this.requireLogin()) return;
     const id = e.currentTarget.dataset.id;
     wx.navigateTo({ url: `/pages/plan/detail?id=${id}` });
   },
 
   async onStartTodayWorkout() {
+    if (!this.requireLogin()) return;
     const { todayPlan } = this.data;
     if (!todayPlan || !todayPlan.planId) {
       wx.showToast({ title: '暂无训练计划', icon: 'none' });
       return;
     }
 
-    // 如果有训练日ID，直接开始训练
     if (todayPlan.planDayId) {
       wx.navigateTo({
         url: `/pages/workout/start?planId=${todayPlan.planId}&planDayId=${todayPlan.planDayId}`
       });
     } else {
-      // 否则跳转到计划详情页选择训练日
       wx.navigateTo({ url: `/pages/plan/detail?id=${todayPlan.planId}` });
     }
   },
 
   goPlanList() {
+    if (!this.requireLogin()) return;
     wx.navigateTo({ url: '/pages/plan/list' });
   },
 
   goBodyRecord() {
+    if (!this.requireLogin()) return;
     wx.navigateTo({ url: '/pages/body/record' });
   },
 
@@ -198,10 +225,12 @@ Page({
   },
 
   goWorkoutHistory() {
+    if (!this.requireLogin()) return;
     wx.navigateTo({ url: '/pages/workout/history' });
   },
 
   goBodyIndex() {
+    if (!this.requireLogin()) return;
     wx.navigateTo({ url: '/pages/body/index' });
   },
 
@@ -209,7 +238,12 @@ Page({
     wx.switchTab({ url: '/pages/profile/index' });
   },
 
+  goLogin() {
+    wx.navigateTo({ url: '/pages/login/index' });
+  },
+
   async onCheckin() {
+    if (!this.requireLogin()) return;
     try {
       const res = await request({
         method: 'POST',

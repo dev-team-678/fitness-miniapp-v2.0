@@ -1,13 +1,23 @@
 <view class="container">
+  <!-- 游客登录引导 -->
+  <view class="guest-banner" wx:if="{{!isLoggedIn}}">
+    <view class="guest-content">
+      <text class="guest-title">欢迎来到运动健身助手</text>
+      <text class="guest-desc">登录后可享受个性化训练计划、AI 健身助手等更多功能</text>
+    </view>
+    <van-button type="primary" round custom-style="background: #FF6B35; border-color: #FF6B35; font-size: 26rpx; padding: 0 36rpx; height: 64rpx; line-height: 64rpx;"
+                bindtap="goLogin">立即登录</van-button>
+  </view>
+
   <!-- 顶部问候 -->
   <view class="header">
     <view class="greeting">
-      <text class="greeting-text">{{greeting}}，{{userInfo.nickname || '健身达人'}}</text>
+      <text class="greeting-text">{{greeting}}，{{isLoggedIn ? (userInfo.nickname || '健身达人') : '健身达人'}}</text>
       <view class="streak-badge" wx:if="{{streakDays > 0}}">
         <text>🔥 连续训练 {{streakDays}} 天</text>
       </view>
     </view>
-    <view class="header-avatar" bindtap="goProfile">
+    <view class="header-avatar" bindtap="goProfile" wx:if="{{isLoggedIn}}">
       <image src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill"></image>
     </view>
   </view>

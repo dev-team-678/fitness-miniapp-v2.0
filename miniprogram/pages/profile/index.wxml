@@ -1,6 +1,18 @@
 <view class="container">
-  <!-- 用户信息卡片 -->
-  <view class="profile-card">
+  <!-- 未登录状态 -->
+  <view class="profile-card" wx:if="{{!isLoggedIn}}">
+    <view class="profile-bg"></view>
+    <view class="profile-info guest-profile">
+      <image class="avatar" src="/images/default-avatar.png" mode="aspectFill"></image>
+      <text class="nickname">游客模式</text>
+      <text class="guest-hint">登录后查看个人信息和使用全部功能</text>
+      <van-button type="primary" round block custom-style="background: #FF6B35; border-color: #FF6B35; margin-top: 24rpx; height: 80rpx;"
+                  bindtap="goLogin">立即登录</van-button>
+    </view>
+  </view>
+
+  <!-- 已登录状态 -->
+  <view class="profile-card" wx:else>
     <view class="profile-bg"></view>
     <view class="profile-info">
       <image class="avatar" src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill"></image>

@@ -14,16 +14,30 @@ Page({
     page: 1,
     hasMore: true,
     loading: false,
-    showFilter: false
+    showFilter: false,
+    isLoggedIn: false
   },
 
   onLoad() {
-    this.loadBodyParts();
-    this.loadExercises();
   },
 
   onShow() {
-    // tabBar 页每次显示都刷新
+    this.checkLoginState();
+  },
+
+  checkLoginState() {
+    const token = wx.getStorageSync('jwt_token');
+    const isLoggedIn = !!token;
+    this.setData({ isLoggedIn });
+    if (isLoggedIn) {
+      // 已登录，加载数据
+      this.loadBodyParts();
+      this.loadExercises();
+    }
+  },
+
+  goLogin() {
+    wx.navigateTo({ url: '/pages/login/index' });
   },
 
   onPullDownRefresh() {

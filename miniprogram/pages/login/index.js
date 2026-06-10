@@ -2,7 +2,8 @@ const { request, tokenManager, showToast } = require('../../utils/request');
 
 Page({
   data: {
-    loading: false
+    loading: false,
+    agreed: false
   },
 
   onLoad() {
@@ -13,8 +14,24 @@ Page({
     }
   },
 
+  toggleAgreement() {
+    this.setData({ agreed: !this.data.agreed });
+  },
+
+  openUserAgreement() {
+    wx.navigateTo({ url: '/pages/login/agreement?type=user' });
+  },
+
+  openPrivacyPolicy() {
+    wx.navigateTo({ url: '/pages/login/agreement?type=privacy' });
+  },
+
+  goGuestMode() {
+    wx.switchTab({ url: '/pages/index/index' });
+  },
+
   async onLogin() {
-    if (this.data.loading) return;
+    if (this.data.loading || !this.data.agreed) return;
     this.setData({ loading: true });
 
     try {
@@ -39,7 +56,8 @@ Page({
       getApp().globalData.userInfo = res.userInfo;
       getApp().globalData.isLoggedIn = true;
 
-      wx.switchTab({ url: '/pages/index/index' });
+      // 跳转到资料设置页，让用户完善头像和昵称
+      wx.redirectTo({ url: '/pages/login/setup' });
     } catch (err) {
       showToast(err.message || '登录失败');
     } finally {

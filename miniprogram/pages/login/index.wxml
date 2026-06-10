@@ -12,11 +12,27 @@
       round
       loading="{{loading}}"
       loading-text="登录中..."
-      custom-class="login-btn"
+      custom-class="login-btn {{!agreed ? 'disabled' : ''}}"
+      disabled="{{!agreed}}"
       bind:click="onLogin"
     >
       微信一键登录
     </van-button>
-    <text class="login-tip">登录即表示同意用户协议和隐私政策</text>
+
+    <view class="agreement-row" bindtap="toggleAgreement">
+      <view class="checkbox {{agreed ? 'checked' : ''}}">
+        <text wx:if="{{agreed}}" class="check-icon">✓</text>
+      </view>
+      <view class="agreement-text">
+        <text>我已阅读并同意</text>
+        <text class="link" catchtap="openUserAgreement">《用户服务协议》</text>
+        <text>和</text>
+        <text class="link" catchtap="openPrivacyPolicy">《隐私政策》</text>
+      </view>
+    </view>
+
+    <view class="guest-link" bindtap="goGuestMode">
+      <text class="guest-link-text">游客模式进入</text>
+    </view>
   </view>
 </view>

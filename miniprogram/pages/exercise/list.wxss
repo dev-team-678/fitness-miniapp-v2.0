@@ -1,4 +1,10 @@
 .container { padding-bottom: 40rpx; }
+
+/* 未登录遮罩 */
+.guest-overlay { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 200rpx 60rpx 0; }
+.guest-icon { font-size: 120rpx; margin-bottom: 32rpx; }
+.guest-title { font-size: 40rpx; font-weight: 700; color: #1A1A2E; margin-bottom: 16rpx; }
+.guest-desc { font-size: 28rpx; color: #999; text-align: center; line-height: 1.6; }
 .filter-bar { display: flex; gap: 16rpx; padding: 16rpx 24rpx; background: #FFF; overflow-x: auto; white-space: nowrap; }
 .filter-tag { padding: 10rpx 24rpx; border-radius: 32rpx; background: #F5F5FA; font-size: 24rpx; color: #666; flex-shrink: 0; }
 .filter-tag.active { background: rgba(255,107,53,0.1); color: #FF6B35; font-weight: 500; }

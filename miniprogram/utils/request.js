@@ -2,8 +2,9 @@
  * RESTful API 请求封装 + JWT Token 管理 (v2.0)
  * 替代原有云函数 callFunction 调用方式
  */
-
-const BASE_URL = 'http://localhost:8080';
+// 本地调试使用：http://localhost:8080
+// const BASE_URL = 'http://localhost:8080';
+const BASE_URL = 'https://tech-vance.cn/api/v1';
 
 // Token 管理
 const tokenManager = {
@@ -76,7 +77,7 @@ function request(options) {
 }
 
 /**
- * Token 过期处理 - 直接跳转登录
+ * Token 过期处理 - 清除 Token，由页面自行决定是否跳转登录
  */
 function handleTokenExpired(options, resolve, reject) {
   // 防止重复处理
@@ -87,9 +88,8 @@ function handleTokenExpired(options, resolve, reject) {
 
   isRefreshing = true;
   tokenManager.removeToken();
+  getApp().globalData.isLoggedIn = false;
 
-  // 跳转登录页面
-  wx.redirectTo({ url: '/pages/login/index' });
   reject(new Error('登录已过期'));
 
   // 重置标志

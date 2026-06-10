@@ -8,8 +8,54 @@
           <image wx:if="{{msg.role === 'assistant'}}" src="/images/logo.png" mode="aspectFit"/>
           <view wx:else class="user-avatar">{{userAvatar}}</view>
         </view>
-        <view class="message-content">
-          <view class="message-text">{{msg.content}}</view>
+        <view class="message-content {{msg.role === 'assistant' ? 'assistant-bubble' : ''}}">
+          <!-- 用户消息：纯文本 -->
+          <view wx:if="{{msg.role === 'user'}}" class="message-text user-text">
+            <text>{{msg.content}}</text>
+          </view>
+
+          <!-- AI 消息：结构化渲染 -->
+          <view wx:else class="rich-content">
+            <block wx:for="{{msg.blocks}}" wx:for-item="block" wx:for-index="bi" wx:key="bi">
+
+              <!-- 标题 -->
+              <view wx:if="{{block.type === 'heading'}}" class="md-h{{block.level}}">
+                <text wx:for="{{block.textParts}}" wx:for-item="tp" wx:key="text" class="{{tp.bold ? 'bold' : ''}}">{{tp.text}}</text>
+              </view>
+
+              <!-- 表格 -->
+              <view wx:elif="{{block.type === 'table'}}" class="md-table">
+                <scroll-view scroll-x class="table-scroll">
+                  <view wx:for="{{block.rows}}" wx:for-item="row" wx:for-index="ri" wx:key="ri"
+                        class="table-row {{ri === 0 ? 'header-row' : ''}}">
+                    <view wx:for="{{row}}" wx:for-item="cell" wx:for-index="ci" wx:key="ci"
+                          class="table-cell">
+                      <text class="{{cell.bold ? 'bold' : ''}}">{{cell.text}}</text>
+                    </view>
+                  </view>
+                </scroll-view>
+              </view>
+
+              <!-- 列表 -->
+              <view wx:elif="{{block.type === 'list'}}" class="md-list">
+                <view wx:for="{{block.items}}" wx:for-item="item" wx:for-index="ii" wx:key="ii" class="list-item">
+                  <text class="list-dot">•</text>
+                  <view class="list-text">
+                    <text wx:for="{{item}}" wx:for-item="part" wx:for-index="pi" wx:key="pi"
+                          class="{{part.bold ? 'bold' : ''}}">{{part.text}}</text>
+                  </view>
+                </view>
+              </view>
+
+              <!-- 段落 -->
+              <view wx:elif="{{block.type === 'paragraph'}}" class="md-p">
+                <text wx:for="{{block.textParts}}" wx:for-item="part" wx:for-index="pi" wx:key="pi"
+                      class="{{part.bold ? 'bold' : ''}}">{{part.text}}</text>
+              </view>
+
+            </block>
+          </view>
+
           <view class="message-time">{{msg.timeStr}}</view>
         </view>
       </view>

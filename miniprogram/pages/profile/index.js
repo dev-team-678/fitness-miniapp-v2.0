@@ -7,6 +7,7 @@ Page({
     stats: { totalWorkouts: 0, streakDays: 0, totalDuration: 0 },
     goalLabel: '',
     levelLabel: '',
+    isLoggedIn: false,
     menuList: [
       { icon: '🏋️', title: '训练历史', url: '/pages/workout/history' },
       { icon: '📈', title: '身体数据', url: '/pages/body/index' },
@@ -18,13 +19,41 @@ Page({
   },
 
   onLoad() {
-    this.loadUserInfo();
-    this.loadStats();
+    this.checkLoginState();
   },
 
   onShow() {
-    this.loadUserInfo();
-    this.loadStats();
+    this.checkLoginState();
+  },
+
+  checkLoginState() {
+    const token = wx.getStorageSync('jwt_token');
+    const isLoggedIn = !!token;
+    this.setData({ isLoggedIn });
+    if (isLoggedIn) {
+      this.loadUserInfo();
+      this.loadStats();
+    }
+  },
+
+  requireLogin() {
+    if (this.data.isLoggedIn) return true;
+    wx.showModal({
+      title: '提示',
+      content: '该功能需要登录后才能使用',
+      confirmText: '去登录',
+      confirmColor: '#FF6B35',
+      success: (res) => {
+        if (res.confirm) {
+          wx.navigateTo({ url: '/pages/login/index' });
+        }
+      }
+    });
+    return false;
+  },
+
+  goLogin() {
+    wx.navigateTo({ url: '/pages/login/index' });
   },
 
   async loadUserInfo() {
@@ -63,10 +92,12 @@ Page({
   },
 
   goEdit() {
+    if (!this.requireLogin()) return;
     wx.navigateTo({ url: '/pages/profile/edit' });
   },
 
   onMenuTap(e) {
+    if (!this.requireLogin()) return;
     const { url } = e.currentTarget.dataset;
     if (url) {
       if (url.includes('switchTab')) {
