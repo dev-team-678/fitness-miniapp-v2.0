@@ -60,6 +60,10 @@ Page({
     try {
       const user = await request({ url: '/miniapp/user/profile' });
       if (user) {
+        // 服务器头像为空时，使用本地缓存的头像
+        if (!user.avatarUrl) {
+          user.avatarUrl = wx.getStorageSync('local_avatar') || '';
+        }
         const goal = FITNESS_GOALS.find(g => g.value === user.fitnessGoal);
         const level = FITNESS_LEVELS.find(l => l.value === user.fitnessLevel);
         this.setData({

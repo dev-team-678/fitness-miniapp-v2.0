@@ -16,11 +16,22 @@ Page({
     });
   },
 
+  formatDate(dateStr) {
+    if (!dateStr) return '-';
+    // 兼容 "2026-06-10" 格式，避免 iOS 上 "-" 解析问题
+    const date = new Date(dateStr.replace(/-/g, '/'));
+    return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+  },
+
   async loadPRList() {
     this.setData({ loading: true });
     try {
       const res = await request({ url: '/miniapp/workout/pr-records' });
-      this.setData({ prList: res || [] });
+      const list = (res || []).map(item => ({
+        ...item,
+        achievedDateFormatted: this.formatDate(item.achievedDate)
+      }));
+      this.setData({ prList: list });
     } catch (err) {
       showToast('加载失败');
     } finally {
@@ -31,11 +42,5 @@ Page({
   goExerciseDetail(e) {
     const id = e.currentTarget.dataset.id;
     wx.navigateTo({ url: `/pages/exercise/detail?id=${id}` });
-  },
-
-  formatDate(dateStr) {
-    if (!dateStr) return '-';
-    const date = new Date(dateStr);
-    return `${date.getMonth() + 1}/${date.getDate()}`;
   }
 });

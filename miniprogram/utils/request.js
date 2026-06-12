@@ -165,7 +165,8 @@ async function uploadFile(filePath, dir = 'media') {
     data: { filename: fileName, dir }
   });
 
-  await new Promise((resolve, reject) => {
+  // 上传到七牛云并检查响应状态码
+  const uploadRes = await new Promise((resolve, reject) => {
     wx.uploadFile({
       url: uploadDomain,
       filePath: filePath,
@@ -175,6 +176,12 @@ async function uploadFile(filePath, dir = 'media') {
       fail: reject
     });
   });
+
+  // wx.uploadFile 的 success 回调只表示请求完成，需要检查状态码
+  if (uploadRes.statusCode !== 200) {
+    console.error('七牛上传失败，状态码:', uploadRes.statusCode, '响应:', uploadRes.data);
+    throw new Error(`文件上传失败 (${uploadRes.statusCode})`);
+  }
 
   return fileUrl;
 }

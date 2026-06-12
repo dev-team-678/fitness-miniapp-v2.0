@@ -21,9 +21,11 @@ Page({
     this.setData({ loading: true });
     try {
       const res = await request({ url: '/miniapp/checkin/achievements' });
+      const stats = res.stats || { total: 0, unlocked: 0, progress: 0 };
+      stats.progress = Math.round(stats.progress);
       this.setData({
         categories: res.categories || [],
-        stats: res.stats || { total: 0, unlocked: 0, progress: 0 }
+        stats
       });
     } catch (err) {
       showToast('加载失败');

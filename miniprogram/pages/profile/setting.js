@@ -22,9 +22,12 @@ Page({
   // 训练提醒 - 读取本地设置
   loadReminderSettings() {
     const settings = wx.getStorageSync('workout_reminder') || {};
+    const time = settings.time || '08:00';
+    // 容错：如果本地存储了无效的 NaN 时间，重置为默认值
+    const validTime = /^\d{2}:\d{2}$/.test(time) ? time : '08:00';
     this.setData({
       reminderEnabled: settings.enabled || false,
-      reminderTime: settings.time || '08:00'
+      reminderTime: validTime
     });
   },
 
@@ -49,10 +52,8 @@ Page({
   },
 
   onTimeChange(e) {
-    const time = e.detail;
-    const hours = String(Math.floor(time / 3600000)).padStart(2, '0');
-    const minutes = String(Math.floor((time % 3600000) / 60000)).padStart(2, '0');
-    const timeStr = `${hours}:${minutes}`;
+    // van-datetime-picker type="time" 返回的 e.detail 已经是 "HH:mm" 格式字符串
+    const timeStr = e.detail;
     this.setData({ reminderTime: timeStr, showTimePicker: false });
     this.saveReminderSettings();
     if (this.data.reminderEnabled) {

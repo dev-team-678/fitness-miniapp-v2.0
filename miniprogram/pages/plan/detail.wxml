@@ -42,10 +42,10 @@
     <view class="section-title">📋 详细安排</view>
     <scroll-view scroll-x class="week-scroll">
       <view class="week-tabs">
-        <view class="week-tab {{currentWeek === item ? 'active' : ''}}" 
+        <view class="week-tab {{currentWeek === (item + 1) ? 'active' : ''}}" 
               wx:for="{{weekCount}}" wx:key="*this"
-              bindtap="onWeekChange" data-week="{{item}}">
-          第{{item}}周
+              bindtap="onWeekChange" data-week="{{item + 1}}">
+          第{{item + 1}}周
         </view>
       </view>
     </scroll-view>

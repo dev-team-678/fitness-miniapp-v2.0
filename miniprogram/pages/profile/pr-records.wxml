@@ -17,7 +17,7 @@
         </view>
         <view class="last-date" wx:if="{{item.achievedDate}}">
           <van-icon name="clock-o" size="12px" color="#999"/>
-          <text>达成日期: {{formatDate(item.achievedDate)}}</text>
+          <text>达成日期: {{item.achievedDateFormatted}}</text>
         </view>
       </view>
       <van-icon name="arrow" color="#CCCCCC"/>

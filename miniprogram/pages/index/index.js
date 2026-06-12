@@ -59,6 +59,10 @@ Page({
   async loadUserInfo() {
     try {
       const user = await request({ url: '/miniapp/user/profile' });
+      // 服务器头像为空时，使用本地缓存的头像
+      if (user && !user.avatarUrl) {
+        user.avatarUrl = wx.getStorageSync('local_avatar') || '';
+      }
       this.setData({ userInfo: user });
       getApp().globalData.userInfo = user;
     } catch (err) {
