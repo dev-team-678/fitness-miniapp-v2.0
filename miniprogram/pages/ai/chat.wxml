@@ -3,7 +3,12 @@
     <view class="date-header" wx:if="{{showDateHeader}}">{{dateHeader}}</view>
 
     <view class="message-list">
-      <view class="message {{msg.role}}" wx:for="{{messages}}" wx:for-item="msg" wx:key="id">
+      <view class="message {{msg.role}}"
+            wx:for="{{messages}}"
+            wx:for-item="msg"
+            wx:key="id"
+            bindlongpress="onCopyMessage"
+            data-content="{{msg.content}}">
         <view class="avatar">
           <image wx:if="{{msg.role === 'assistant'}}" src="/images/logo.png" mode="aspectFit"/>
           <view wx:else class="user-avatar">{{userAvatar}}</view>
@@ -11,7 +16,7 @@
         <view class="message-content {{msg.role === 'assistant' ? 'assistant-bubble' : ''}}">
           <!-- 用户消息：纯文本 -->
           <view wx:if="{{msg.role === 'user'}}" class="message-text user-text">
-            <text>{{msg.content}}</text>
+            <text user-select="true" selectable="true" space="nbsp">{{msg.content}}</text>
           </view>
 
           <!-- AI 消息：结构化渲染 -->
@@ -20,7 +25,7 @@
 
               <!-- 标题 -->
               <view wx:if="{{block.type === 'heading'}}" class="md-h{{block.level}}">
-                <text wx:for="{{block.textParts}}" wx:for-item="tp" wx:key="text" class="{{tp.bold ? 'bold' : ''}}">{{tp.text}}</text>
+                <text wx:for="{{block.textParts}}" wx:for-item="tp" wx:key="text" class="{{tp.bold ? 'bold' : ''}}" user-select="true" selectable="true">{{tp.text}}</text>
               </view>
 
               <!-- 表格 -->
@@ -30,7 +35,7 @@
                         class="table-row {{ri === 0 ? 'header-row' : ''}}">
                     <view wx:for="{{row}}" wx:for-item="cell" wx:for-index="ci" wx:key="ci"
                           class="table-cell">
-                      <text class="{{cell.bold ? 'bold' : ''}}">{{cell.text}}</text>
+                      <text class="{{cell.bold ? 'bold' : ''}}" user-select="true" selectable="true">{{cell.text}}</text>
                     </view>
                   </view>
                 </scroll-view>
@@ -42,7 +47,7 @@
                   <text class="list-dot">•</text>
                   <view class="list-text">
                     <text wx:for="{{item}}" wx:for-item="part" wx:for-index="pi" wx:key="pi"
-                          class="{{part.bold ? 'bold' : ''}}">{{part.text}}</text>
+                          class="{{part.bold ? 'bold' : ''}}" user-select="true" selectable="true">{{part.text}}</text>
                   </view>
                 </view>
               </view>
@@ -50,7 +55,7 @@
               <!-- 段落 -->
               <view wx:elif="{{block.type === 'paragraph'}}" class="md-p">
                 <text wx:for="{{block.textParts}}" wx:for-item="part" wx:for-index="pi" wx:key="pi"
-                      class="{{part.bold ? 'bold' : ''}}">{{part.text}}</text>
+                      class="{{part.bold ? 'bold' : ''}}" user-select="true" selectable="true">{{part.text}}</text>
               </view>
 
             </block>

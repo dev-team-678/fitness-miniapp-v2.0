@@ -207,3 +207,24 @@
   color: #999;
   font-size: 24rpx;
 }
+
+.fab-publish {
+  position: fixed;
+  right: 40rpx;
+  bottom: calc(120rpx + env(safe-area-inset-bottom));
+  width: 100rpx;
+  height: 100rpx;
+  background: #FF6B35;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6rpx 20rpx rgba(255, 107, 53, 0.4);
+  z-index: 99;
+}
+
+.fab-icon {
+  font-size: 48rpx;
+  color: #fff;
+  line-height: 1;
+}

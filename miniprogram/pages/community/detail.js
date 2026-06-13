@@ -5,6 +5,8 @@ Page({
     postId: null,
     post: null,
     comments: [],
+    commentPage: 1,
+    commentHasMore: true,
     commentText: '',
     replyingTo: null,
     loading: true
@@ -25,18 +27,38 @@ Page({
         url: `/miniapp/post/${this.data.postId}`
       });
 
-      // 后端可能直接返回 post 或 { post, comments }
       const post = res.post || res;
-      const comments = res.comments || post.comments || [];
+      this.setData({ post, loading: false });
 
-      this.setData({
-        post,
-        comments,
-        loading: false
-      });
+      // 评论需要单独加载
+      this.setData({ comments: [], commentPage: 1, commentHasMore: true });
+      this.loadComments();
     } catch (err) {
       console.error('loadDetail error:', err);
       this.setData({ loading: false });
+    }
+  },
+
+  async loadComments() {
+    try {
+      const res = await request({
+        url: `/miniapp/post/${this.data.postId}/comments`,
+        data: {
+          pageNum: this.data.commentPage,
+          pageSize: 50
+        }
+      });
+
+      const newComments = res.list || [];
+      const comments = this.data.commentPage === 1
+        ? newComments
+        : [...this.data.comments, ...newComments];
+      this.setData({
+        comments,
+        commentHasMore: newComments.length >= 50
+      });
+    } catch (err) {
+      console.error('loadComments error:', err);
     }
   },
 
@@ -44,6 +66,13 @@ Page({
     this.loadDetail().then(() => {
       wx.stopPullDownRefresh();
     });
+  },
+
+  onReachBottom() {
+    if (this.data.commentHasMore) {
+      this.setData({ commentPage: this.data.commentPage + 1 });
+      this.loadComments();
+    }
   },
 
   onShareAppMessage() {
@@ -131,7 +160,15 @@ Page({
 
       showToast('评论成功');
       this.setData({ commentText: '', replyingTo: null });
-      this.loadDetail();
+      // 重新加载评论而非整个页面
+      this.setData({ commentPage: 1 });
+      this.loadComments();
+      // 更新帖子的评论数
+      if (this.data.post) {
+        this.setData({
+          post: { ...this.data.post, commentCount: (this.data.post.commentCount || 0) + 1 }
+        });
+      }
     } catch (err) {
       wx.showToast({ title: '评论失败', icon: 'none' });
     }

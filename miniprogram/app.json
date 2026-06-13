@@ -27,7 +27,8 @@
     "pages/ai/plan-preview",
     "pages/ai/profile-edit",
     "pages/community/index",
-    "pages/community/detail"
+    "pages/community/detail",
+    "pages/community/publish"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -59,6 +60,12 @@
         "text": "动作库",
         "iconPath": "images/tab-exercise.png",
         "selectedIconPath": "images/tab-exercise-active.png"
+      },
+      {
+        "pagePath": "pages/community/index",
+        "text": "社区",
+        "iconPath": "images/tab-community.png",
+        "selectedIconPath": "images/tab-community-active.png"
       },
       {
         "pagePath": "pages/profile/index",

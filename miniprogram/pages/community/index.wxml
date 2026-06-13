@@ -90,4 +90,8 @@
       <text>没有更多了</text>
     </view>
   </view>
+
+  <view class="fab-publish" bindtap="goToPublish">
+    <text class="fab-icon">+</text>
+  </view>
 </view>

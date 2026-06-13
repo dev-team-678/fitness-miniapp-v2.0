@@ -129,6 +129,20 @@ Page({
     }
   },
 
+  goToPublish() {
+    wx.navigateTo({
+      url: '/pages/community/publish'
+    });
+  },
+
+  previewImage(e) {
+    const { imgs, index } = e.currentTarget.dataset;
+    wx.previewImage({
+      current: imgs[index],
+      urls: imgs
+    });
+  },
+
   async onShare(e) {
     const postId = e.currentTarget.dataset.id;
     const post = this.data.posts.find(p => p.id === postId);

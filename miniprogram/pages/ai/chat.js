@@ -145,9 +145,53 @@ Page({
         }));
         this.setData({ messages });
         this.scrollToBottom();
+
+        // 检查是否有仍在处理中的 assistant 消息,如果有则启动轮询
+        const processingMsg = messages.find(
+          m => m.role === 'assistant' && m.streamStatus === 1
+        );
+        if (processingMsg) {
+          this.pollForMessage(processingMsg.id);
+        }
       }
     } catch (err) {
       console.error('加载历史失败:', err);
+    }
+  },
+
+  /**
+   * 轮询指定消息直到完成或失败
+   */
+  async pollForMessage(messageId) {
+    let pollCount = 0;
+    const maxPolls = 40;
+    while (pollCount < maxPolls) {
+      const delay = pollCount < 5 ? 1000 : pollCount < 15 ? 2000 : 3000;
+      await new Promise(resolve => setTimeout(resolve, delay));
+      pollCount++;
+      try {
+        const pollRes = await request({
+          url: `/miniapp/ai/chat/messages/${messageId}/status`
+        });
+        if (pollRes && pollRes.status !== 1) {
+          const rawContent = pollRes.content || '抱歉，AI服务暂时不可用，请稍后再试。';
+          const messages = [...this.data.messages];
+          const idx = messages.findIndex(m => m.id === messageId);
+          if (idx >= 0) {
+            messages[idx] = {
+              ...messages[idx],
+              content: rawContent,
+              blocks: parseRichText(rawContent),
+              streamStatus: pollRes.status
+            };
+            this.setData({ messages });
+            this.scrollToBottom();
+          }
+          break;
+        }
+      } catch (pollErr) {
+        console.warn('历史轮询失败:', pollErr);
+      }
     }
   },
 
@@ -223,17 +267,78 @@ Page({
         if (res.sessionId && !this.data.sessionId) {
           this.setData({ sessionId: res.sessionId });
         }
-        const rawContent = res.content || '';
+
+        let rawContent = res.content || '';
+        let finalStatus = res.status;
+        const messageId = res.messageId;
+
+        // 异步模式: status=1 表示 AI 仍在生成,需要轮询直到完成(2)或失败(3)
+        if (res.status === 1 && messageId) {
+          // 先插入一条 loading 占位消息
+          const loadingMsg = {
+            id: messageId,
+            role: 'assistant',
+            content: '',
+            blocks: [{ type: 'paragraph', textParts: [{ text: '正在思考中...', bold: false }] }],
+            timeStr: this.formatTime(new Date().toISOString()),
+            loading: true
+          };
+          this.setData({
+            messages: [...this.data.messages, loadingMsg]
+          });
+          this.scrollToBottom();
+
+          // 轮询: 指数退避策略
+          // 前5次每1秒, 6-15次每2秒, 之后每3秒, 总超时约90秒
+          let pollCount = 0;
+          const maxPolls = 40;
+          while (pollCount < maxPolls) {
+            const delay = pollCount < 5 ? 1000 : pollCount < 15 ? 2000 : 3000;
+            await new Promise(resolve => setTimeout(resolve, delay));
+            pollCount++;
+            try {
+              const pollRes = await request({
+                url: `/miniapp/ai/chat/messages/${messageId}/status`
+              });
+              if (pollRes && pollRes.status !== 1) {
+                rawContent = pollRes.content || '';
+                finalStatus = pollRes.status;
+                break;
+              }
+            } catch (pollErr) {
+              console.warn('轮询失败,重试中:', pollErr);
+            }
+          }
+
+          if (finalStatus === 1) {
+            rawContent = '抱歉，AI 响应超时，请稍后重试。';
+            finalStatus = 3;
+          }
+        }
+
+        // status=3 表示 AI 调用失败
+        if (finalStatus === 3 && !rawContent) {
+          rawContent = '抱歉，AI服务暂时不可用，请稍后再试。';
+        }
+
         const assistantMsg = {
-          id: res.messageId || Date.now() + 1,
+          id: messageId || Date.now() + 1,
           role: 'assistant',
           content: rawContent,
           blocks: parseRichText(rawContent),
           timeStr: this.formatTime(new Date().toISOString())
         };
-        this.setData({
-          messages: [...this.data.messages, assistantMsg]
-        });
+
+        // 如果之前插入了 loading 消息,替换它;否则追加
+        const messages = [...this.data.messages];
+        const existingIdx = messages.findIndex(m => m.id === messageId);
+        if (existingIdx >= 0) {
+          messages[existingIdx] = assistantMsg;
+        } else {
+          messages.push(assistantMsg);
+        }
+
+        this.setData({ messages });
         this.scrollToBottom();
       }
     } catch (err) {
@@ -254,6 +359,24 @@ Page({
     setTimeout(() => {
       this.setData({ scrollTop: 999999 });
     }, 100);
+  },
+
+  onCopyMessage(e) {
+    const content = e.currentTarget.dataset.content || '';
+    if (!content) {
+      showToast('暂无内容可复制');
+      return;
+    }
+    wx.setClipboardData({
+      data: content,
+      success: () => {
+        showToast('已复制到剪贴板');
+      },
+      fail: (err) => {
+        console.error('复制失败', err);
+        showToast('复制失败,请重试');
+      }
+    });
   },
 
   loadMore() {

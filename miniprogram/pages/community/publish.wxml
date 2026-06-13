@@ -1,0 +1,46 @@
+<view class="container">
+  <view class="form">
+    <view class="form-label">说点什么</view>
+    <textarea
+      class="content-input"
+      placeholder="分享你的健身心得、训练成果..."
+      value="{{content}}"
+      bindinput="onInput"
+      maxlength="1000"
+      auto-height
+      show-confirm-bar="{{false}}"
+    />
+    <view class="char-count">{{content.length}}/1000</view>
+  </view>
+
+  <view class="form">
+    <view class="form-label">添加图片 <text class="form-hint">(最多9张)</text></view>
+    <view class="image-list">
+      <view wx:for="{{images}}" wx:key="index" class="image-item">
+        <image src="{{item.tempFilePath || item}}" mode="aspectFill" class="preview-img"/>
+        <view class="remove-btn" data-index="{{index}}" bindtap="removeImage">
+          <text class="remove-icon">×</text>
+        </view>
+        <view wx:if="{{item.uploading}}" class="uploading-mask">
+          <text class="uploading-text">上传中</text>
+        </view>
+      </view>
+      <view
+        wx:if="{{images.length < 9}}"
+        class="add-image-btn"
+        bindtap="chooseImage"
+      >
+        <text class="add-icon">+</text>
+        <text class="add-text">添加</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="submit-area">
+    <button
+      class="submit-btn {{canSubmit ? '' : 'disabled'}}"
+      bindtap="onSubmit"
+      disabled="{{submitting}}"
+    >{{submitting ? '发布中...' : '发布动态'}}</button>
+  </view>
+</view>
