@@ -72,29 +72,29 @@ INSERT INTO `plan_day` (`plan_id`, `week_number`, `day_of_week`, `day_label`, `i
 (1, 1, 7, '休息日', 1, 7);
 
 -- 计划1 - 胸+三头日动作
-INSERT INTO `plan_exercise` (`plan_day_id`, `exercise_id`, `sets`, `reps`, `rest_sec`, `sort_order`, `notes`) VALUES
-(1, 1, 4, '10-12', 90, 1, '注意肩胛骨后缩，挺胸'),
-(1, 3, 3, '12-15', 60, 2, '感受胸部拉伸'),
-(1, 2, 3, '10-12', 60, 3, '30-45度角'),
-(1, 4, 3, '12-15', 60, 4, '大臂不动');
+INSERT INTO `plan_day_exercise` (`plan_day_id`, `exercise_id`, `sets`, `reps`, `rest_seconds`, `sort`) VALUES
+(1, 1, 4, '10-12', 90, 1),
+(1, 3, 3, '12-15', 60, 2),
+(1, 2, 3, '10-12', 60, 3),
+(1, 4, 3, '12-15', 60, 4);
 
 -- 计划1 - 背+二头日动作
-INSERT INTO `plan_exercise` (`plan_day_id`, `exercise_id`, `sets`, `reps`, `rest_sec`, `sort_order`, `notes`) VALUES
-(3, 5, 4, '6-10', 120, 1, '拉不到可以用弹力带辅助'),
-(3, 6, 4, '10-12', 90, 2, '拉向腹部，挤压背部'),
-(3, 15, 3, '10-12', 60, 3, '大臂不动，控制节奏');
+INSERT INTO `plan_day_exercise` (`plan_day_id`, `exercise_id`, `sets`, `reps`, `rest_seconds`, `sort`) VALUES
+(3, 5, 4, '6-10', 120, 1),
+(3, 6, 4, '10-12', 90, 2),
+(3, 15, 3, '10-12', 60, 3);
 
 -- 计划1 - 肩+核心日动作
-INSERT INTO `plan_exercise` (`plan_day_id`, `exercise_id`, `sets`, `reps`, `rest_sec`, `sort_order`, `notes`) VALUES
-(5, 7, 4, '12-15', 60, 1, '不要耸肩'),
-(5, 10, 3, '30-45', 60, 2, '保持身体一条直线，单位秒'),
-(5, 11, 3, '15-20', 45, 3, '下背部贴紧地面');
+INSERT INTO `plan_day_exercise` (`plan_day_id`, `exercise_id`, `sets`, `reps`, `rest_seconds`, `sort`) VALUES
+(5, 7, 4, '12-15', 60, 1),
+(5, 10, 3, '30-45', 60, 2),
+(5, 11, 3, '15-20', 45, 3);
 
 -- 计划1 - 腿部日动作
-INSERT INTO `plan_exercise` (`plan_day_id`, `exercise_id`, `sets`, `reps`, `rest_sec`, `sort_order`, `notes`) VALUES
-(6, 8, 4, '8-12', 120, 1, '蹲至大腿平行地面'),
-(6, 9, 4, '10-12', 90, 2, '感受腘绳肌拉伸'),
-(6, 13, 3, '15-20', 45, 3, '热身收尾');
+INSERT INTO `plan_day_exercise` (`plan_day_id`, `exercise_id`, `sets`, `reps`, `rest_seconds`, `sort`) VALUES
+(6, 8, 4, '8-12', 120, 1),
+(6, 9, 4, '10-12', 90, 2),
+(6, 13, 3, '15-20', 45, 3);
 
 -- 计划2：减脂塑形计划 - 第1周
 INSERT INTO `plan_day` (`plan_id`, `week_number`, `day_of_week`, `day_label`, `is_rest_day`, `sort_order`) VALUES
@@ -107,26 +107,26 @@ INSERT INTO `plan_day` (`plan_id`, `week_number`, `day_of_week`, `day_label`, `i
 (2, 1, 7, '休息日', 1, 7);
 
 -- 计划2 - 上肢力量日
-INSERT INTO `plan_exercise` (`plan_day_id`, `exercise_id`, `sets`, `reps`, `rest_sec`, `sort_order`) VALUES
+INSERT INTO `plan_day_exercise` (`plan_day_id`, `exercise_id`, `sets`, `reps`, `rest_seconds`, `sort`) VALUES
 (8, 1, 3, '12', 60, 1),
 (8, 5, 3, '8-10', 90, 2),
 (8, 7, 3, '15', 45, 3),
 (8, 15, 3, '12', 45, 4);
 
 -- 计划2 - 有氧+核心日
-INSERT INTO `plan_exercise` (`plan_day_id`, `exercise_id`, `sets`, `reps`, `rest_sec`, `sort_order`, `notes`) VALUES
-(9, 12, 1, '1', 60, 1, '30分钟匀速跑'),
-(9, 10, 3, '45', 30, 2, '单位秒'),
-(9, 11, 3, '20', 30, 3, NULL);
+INSERT INTO `plan_day_exercise` (`plan_day_id`, `exercise_id`, `sets`, `reps`, `rest_seconds`, `sort`) VALUES
+(9, 12, 1, '1', 60, 1),
+(9, 10, 3, '45', 30, 2),
+(9, 11, 3, '20', 30, 3);
 
 -- 计划2 - 下肢力量日
-INSERT INTO `plan_exercise` (`plan_day_id`, `exercise_id`, `sets`, `reps`, `rest_sec`, `sort_order`) VALUES
+INSERT INTO `plan_day_exercise` (`plan_day_id`, `exercise_id`, `sets`, `reps`, `rest_seconds`, `sort`) VALUES
 (11, 8, 4, '10-12', 90, 1),
 (11, 9, 3, '12', 60, 2),
 (11, 13, 3, '20', 45, 3);
 
 -- 计划2 - 全身循环日
-INSERT INTO `plan_exercise` (`plan_day_id`, `exercise_id`, `sets`, `reps`, `rest_sec`, `sort_order`) VALUES
+INSERT INTO `plan_day_exercise` (`plan_day_id`, `exercise_id`, `sets`, `reps`, `rest_seconds`, `sort`) VALUES
 (13, 14, 3, '10', 30, 1),
 (13, 8, 3, '12', 30, 2),
 (13, 1, 3, '12', 30, 3),
@@ -138,17 +138,17 @@ INSERT INTO `plan_day` (`plan_id`, `week_number`, `day_of_week`, `day_label`, `i
 (4, 1, 3, '下肢+核心', 0, 2),
 (4, 1, 5, '全身燃脂', 0, 3);
 
-INSERT INTO `plan_exercise` (`plan_day_id`, `exercise_id`, `sets`, `reps`, `rest_sec`, `sort_order`, `notes`) VALUES
-(15, 13, 3, '20', 30, 1, '热身'),
-(15, 10, 3, '45', 45, 2, '单位秒'),
-(15, 11, 3, '20', 30, 3, NULL);
+INSERT INTO `plan_day_exercise` (`plan_day_id`, `exercise_id`, `sets`, `reps`, `rest_seconds`, `sort`) VALUES
+(15, 13, 3, '20', 30, 1),
+(15, 10, 3, '45', 45, 2),
+(15, 11, 3, '20', 30, 3);
 
-INSERT INTO `plan_exercise` (`plan_day_id`, `exercise_id`, `sets`, `reps`, `rest_sec`, `sort_order`) VALUES
+INSERT INTO `plan_day_exercise` (`plan_day_id`, `exercise_id`, `sets`, `reps`, `rest_seconds`, `sort`) VALUES
 (16, 13, 3, '15', 30, 1),
 (16, 8, 4, '15', 60, 2),
 (16, 10, 3, '45', 45, 3);
 
-INSERT INTO `plan_exercise` (`plan_day_id`, `exercise_id`, `sets`, `reps`, `rest_sec`, `sort_order`) VALUES
+INSERT INTO `plan_day_exercise` (`plan_day_id`, `exercise_id`, `sets`, `reps`, `rest_seconds`, `sort`) VALUES
 (17, 13, 3, '20', 20, 1),
 (17, 14, 3, '10', 30, 2),
 (17, 8, 3, '15', 30, 3),
