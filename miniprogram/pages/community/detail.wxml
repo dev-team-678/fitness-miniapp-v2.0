@@ -13,6 +13,9 @@
             <text class="time">{{post.createdAt}}</text>
           </view>
         </view>
+        <view class="post-more" bindtap="onShowPostMenu">
+          <text class="more-icon">···</text>
+        </view>
       </view>
 
       <view class="post-content">
@@ -79,6 +82,12 @@
               data-nickname="{{item.nickname}}"
               bindtap="setReply"
             >回复</text>
+            <text
+              class="report-btn"
+              data-targetid="{{item.id}}"
+              data-targettype="comment"
+              bindtap="goToReport"
+            >举报</text>
           </view>
         </view>
       </view>
@@ -101,4 +110,14 @@
       </view>
     </view>
   </view>
+
+  <!-- 帖子更多操作菜单 -->
+  <van-action-sheet
+    show="{{showPostMenu}}"
+    actions="{{postMenuActions}}"
+    cancel-text="取消"
+    bind:close="onClosePostMenu"
+    bind:cancel="onClosePostMenu"
+    bind:select="onSelectPostMenu"
+  />
 </view>

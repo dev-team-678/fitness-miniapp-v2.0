@@ -1,0 +1,53 @@
+<view class="container">
+  <view class="section">
+    <view class="section-title">举报原因</view>
+    <van-radio-group value="{{selectedReason}}" bind:change="onReasonChange">
+      <van-cell-group>
+        <van-cell
+          wx:for="{{reasons}}"
+          wx:key="index"
+          title="{{item}}"
+          clickable
+          data-index="{{index}}"
+          bind:click="onReasonClick"
+        >
+          <van-radio slot="icon" name="{{item}}" checked-color="#248A52" />
+        </van-cell>
+      </van-cell-group>
+    </van-radio-group>
+  </view>
+
+  <view class="section">
+    <view class="section-title">补充描述（选填）</view>
+    <textarea
+      class="desc-input"
+      placeholder="请详细描述举报原因，帮助我们更快处理"
+      value="{{description}}"
+      bindinput="onDescInput"
+      maxlength="500"
+      auto-height
+    />
+    <view class="word-count">{{description.length}}/500</view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">上传截图（选填）</view>
+    <van-uploader
+      file-list="{{fileList}}"
+      max-count="3"
+      bind:after-read="onAfterRead"
+      bind:delete="onDeleteImage"
+    />
+    <view class="upload-tip">最多上传3张截图</view>
+  </view>
+
+  <view class="footer">
+    <button
+      class="submit-btn {{!selectedReason ? 'disabled' : ''}}"
+      bindtap="onSubmit"
+      disabled="{{submitting || !selectedReason}}"
+    >
+      {{submitting ? '提交中...' : '提交举报'}}
+    </button>
+  </view>
+</view>

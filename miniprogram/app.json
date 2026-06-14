@@ -28,7 +28,8 @@
     "pages/ai/profile-edit",
     "pages/community/index",
     "pages/community/detail",
-    "pages/community/publish"
+    "pages/community/publish",
+    "pages/community/report"
   ],
   "window": {
     "backgroundTextStyle": "light",

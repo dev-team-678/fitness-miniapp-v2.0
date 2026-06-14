@@ -28,6 +28,16 @@
   margin-bottom: 20rpx;
 }
 
+.post-more {
+  padding: 10rpx 16rpx;
+}
+
+.more-icon {
+  font-size: 36rpx;
+  color: #999;
+  letter-spacing: 4rpx;
+}
+
 .user-info {
   display: flex;
   align-items: center;
@@ -199,6 +209,12 @@
 .reply-btn {
   font-size: 22rpx;
   color: #999;
+}
+
+.report-btn {
+  font-size: 22rpx;
+  color: #ccc;
+  margin-left: 24rpx;
 }
 
 .comment-input-area {

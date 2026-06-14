@@ -9,7 +9,11 @@ Page({
     commentHasMore: true,
     commentText: '',
     replyingTo: null,
-    loading: true
+    loading: true,
+    showPostMenu: false,
+    postMenuActions: [
+      { name: '举报', subname: '', color: '#ee0a24' }
+    ]
   },
 
   onLoad(options) {
@@ -181,5 +185,32 @@ Page({
         url: `/pages/profile/index?userId=${userId}`
       });
     }
+  },
+
+  // 帖子更多操作菜单
+  onShowPostMenu() {
+    this.setData({ showPostMenu: true });
+  },
+
+  onClosePostMenu() {
+    this.setData({ showPostMenu: false });
+  },
+
+  onSelectPostMenu(event) {
+    this.setData({ showPostMenu: false });
+    const { name } = event.detail;
+    if (name === '举报') {
+      wx.navigateTo({
+        url: `/pages/community/report?targetId=${this.data.postId}&targetType=post`
+      });
+    }
+  },
+
+  // 评论举报
+  goToReport(e) {
+    const { targetid, targettype } = e.currentTarget.dataset;
+    wx.navigateTo({
+      url: `/pages/community/report?targetId=${targetid}&targetType=${targettype}`
+    });
   }
 });
