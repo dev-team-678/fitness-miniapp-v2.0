@@ -32,14 +32,14 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#FF6B35",
+    "navigationBarBackgroundColor": "#2BB673",
     "navigationBarTitleText": "运动健身助手",
     "navigationBarTextStyle": "white",
-    "backgroundColor": "#F5F5FA"
+    "backgroundColor": "#F5FBF7"
   },
   "tabBar": {
-    "color": "#999999",
-    "selectedColor": "#FF6B35",
+    "color": "#9AA8A4",
+    "selectedColor": "#2BB673",
     "backgroundColor": "#ffffff",
     "borderStyle": "black",
     "list": [

@@ -65,7 +65,7 @@ Page({
     wx.showModal({
       title: '确认使用此计划',
       content: '确认后将保存为正式训练计划，可在"我的计划"中查看',
-      confirmColor: '#FF6B35',
+      confirmColor: '#2BB673',
       success: async (res) => {
         if (res.confirm) {
           try {

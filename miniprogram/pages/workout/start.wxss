@@ -78,7 +78,7 @@
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #FF6B35, #FF8F65);
+  background: linear-gradient(90deg, #2BB673, #5BCFAB);
   border-radius: 4rpx;
   transition: width 0.3s;
 }
@@ -102,8 +102,8 @@
 }
 
 .exercise-tab.active {
-  background: rgba(255, 107, 53, 0.1);
-  border: 2rpx solid #FF6B35;
+  background: rgba(43, 182, 115, 0.1);
+  border: 2rpx solid #2BB673;
 }
 
 .exercise-tab.done {
@@ -147,7 +147,7 @@
 
 .exercise-target {
   font-size: 26rpx;
-  color: #FF6B35;
+  color: #2BB673;
 }
 
 /* 已完成组列表 */
@@ -175,7 +175,7 @@
 }
 
 .set-row.latest {
-  background: rgba(255, 107, 53, 0.03);
+  background: rgba(43, 182, 115, 0.03);
 }
 
 .set-col {
@@ -187,7 +187,7 @@
 
 .set-num {
   font-weight: 600;
-  color: #FF6B35;
+  color: #2BB673;
 }
 
 /* 输入区域 */
@@ -208,7 +208,7 @@
 .set-input-label {
   font-size: 32rpx;
   font-weight: 600;
-  color: #FF6B35;
+  color: #2BB673;
 }
 
 .input-row {
@@ -307,7 +307,7 @@
   width: 240rpx;
   height: 240rpx;
   border-radius: 50%;
-  border: 8rpx solid #FF6B35;
+  border: 8rpx solid #2BB673;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -318,7 +318,7 @@
 .rest-time {
   font-size: 80rpx;
   font-weight: 700;
-  color: #FF6B35;
+  color: #2BB673;
 }
 
 .rest-unit {
@@ -336,7 +336,7 @@
 
 .rest-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #FF6B35, #FF8F65);
+  background: linear-gradient(90deg, #2BB673, #5BCFAB);
   border-radius: 4rpx;
   transition: width 1s linear;
 }
@@ -378,7 +378,7 @@
 }
 
 .feeling-item.selected {
-  background: rgba(255, 107, 53, 0.1);
+  background: rgba(43, 182, 115, 0.1);
   transform: scale(1.1);
 }
 
@@ -392,6 +392,6 @@
 }
 
 .feeling-item.selected .feeling-label {
-  color: #FF6B35;
+  color: #2BB673;
   font-weight: 500;
 }

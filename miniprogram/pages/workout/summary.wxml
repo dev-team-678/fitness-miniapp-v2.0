@@ -41,10 +41,10 @@
 
   <view class="actions">
     <van-button type="primary" block round
-                custom-style="background: linear-gradient(135deg, #FF6B35, #FF8F65); border: none; height: 88rpx; margin-bottom: 24rpx;"
+                custom-style="background: linear-gradient(135deg, #2BB673, #5BCFAB); border: none; height: 88rpx; margin-bottom: 24rpx;"
                 bindtap="goHome">返回首页</van-button>
     <van-button plain block round
-                custom-style="color: #FF6B35; border-color: #FF6B35; height: 88rpx; margin-bottom: 24rpx;"
+                custom-style="color: #2BB673; border-color: #2BB673; height: 88rpx; margin-bottom: 24rpx;"
                 bindtap="goBodyRecord">记录体重</van-button>
     <van-button plain block round
                 custom-style="color: #666; border-color: #ddd; height: 88rpx;"

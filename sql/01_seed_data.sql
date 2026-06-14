@@ -156,7 +156,7 @@ INSERT INTO `plan_day_exercise` (`plan_day_id`, `exercise_id`, `sets`, `reps`, `
 
 -- 成就配置
 INSERT INTO `achievement` (`name`, `description`, `condition_type`, `condition_value`, `badge_color`, `sort_order`) VALUES
-('初出茅庐', '完成第1次训练', 'total_workouts', 1, '#FF6B35', 1),
+('初出茅庐', '完成第1次训练', 'total_workouts', 1, '#2BB673', 1),
 ('坚持一周', '连续训练7天', 'streak_days', 7, '#4CAF50', 2),
 ('钢铁意志', '连续训练30天', 'streak_days', 30, '#2196F3', 3),
 ('训练达人', '累计完成50次训练', 'total_workouts', 50, '#9C27B0', 4),

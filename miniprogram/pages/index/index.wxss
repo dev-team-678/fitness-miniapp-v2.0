@@ -8,7 +8,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(135deg, #FF6B35, #FF8F65);
+  background: linear-gradient(135deg, #2BB673, #5BCFAB);
   border-radius: 20rpx;
   padding: 32rpx;
   margin-bottom: 24rpx;
@@ -56,7 +56,7 @@
 
 .streak-badge {
   display: inline-block;
-  background: linear-gradient(135deg, #FF6B35, #FF8F65);
+  background: linear-gradient(135deg, #2BB673, #5BCFAB);
   color: #FFFFFF;
   padding: 6rpx 20rpx;
   border-radius: 20rpx;
@@ -69,7 +69,7 @@
   border-radius: 50%;
   overflow: hidden;
   margin-left: 24rpx;
-  border: 4rpx solid #FF6B35;
+  border: 4rpx solid #2BB673;
 }
 
 .header-avatar image {
@@ -100,7 +100,7 @@
 
 .plan-day-label {
   font-size: 28rpx;
-  color: #FF6B35;
+  color: #2BB673;
   margin-top: 8rpx;
 }
 
@@ -123,7 +123,7 @@
 
 .ex-detail {
   font-size: 26rpx;
-  color: #FF6B35;
+  color: #2BB673;
   font-weight: 500;
 }
 
@@ -161,7 +161,7 @@
 }
 
 .week-day.today .day-label {
-  color: #FF6B35;
+  color: #2BB673;
   font-weight: 600;
 }
 
@@ -181,7 +181,7 @@
 }
 
 .week-day.today .day-dot {
-  background: rgba(255, 107, 53, 0.1);
+  background: rgba(43, 182, 115, 0.1);
 }
 
 .week-stats {
@@ -200,7 +200,7 @@
 .stat-num {
   font-size: 40rpx;
   font-weight: 700;
-  color: #FF6B35;
+  color: #2BB673;
 }
 
 .stat-label {

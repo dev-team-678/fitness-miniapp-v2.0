@@ -4,7 +4,7 @@
     <text class="guest-icon">💪</text>
     <text class="guest-title">动作库</text>
     <text class="guest-desc">登录后查看丰富的健身动作库</text>
-    <van-button type="primary" round custom-style="background: #FF6B35; border-color: #FF6B35; margin-top: 24rpx; padding: 0 60rpx; height: 80rpx; line-height: 80rpx;"
+    <van-button type="primary" round custom-style="background: #2BB673; border-color: #2BB673; margin-top: 24rpx; padding: 0 60rpx; height: 80rpx; line-height: 80rpx;"
                 bindtap="goLogin">立即登录</van-button>
   </view>
 
@@ -14,7 +14,7 @@
                 background="#F5F5FA" bind:search="onSearch" bind:clear="onSearchClear" />
 
     <van-tabs active="{{currentTab}}" bind:change="onTabChange" sticky="{{true}}"
-              color="#FF6B35" title-active-color="#FF6B35">
+              color="#2BB673" title-active-color="#2BB673">
       <van-tab title="全部" name="all"></van-tab>
       <van-tab wx:for="{{bodyParts}}" wx:key="id" title="{{item.name}}" name="{{item.id}}"></van-tab>
     </van-tabs>
@@ -47,7 +47,7 @@
       </view>
     </view>
 
-    <van-loading wx:if="{{loading}}" type="spinner" color="#FF6B35" size="24px" custom-style="display:flex;justify-content:center;padding:32rpx;">加载中...</van-loading>
+    <van-loading wx:if="{{loading}}" type="spinner" color="#2BB673" size="24px" custom-style="display:flex;justify-content:center;padding:32rpx;">加载中...</van-loading>
     <van-empty wx:if="{{exercises.length === 0 && !loading}}" image="search" description="暂无动作"></van-empty>
   </block>
 </view>

@@ -5,7 +5,7 @@
       <text class="guest-title">欢迎来到运动健身助手</text>
       <text class="guest-desc">登录后可享受个性化训练计划、AI 健身助手等更多功能</text>
     </view>
-    <van-button type="primary" round custom-style="background: #FF6B35; border-color: #FF6B35; font-size: 26rpx; padding: 0 36rpx; height: 64rpx; line-height: 64rpx;"
+    <van-button type="primary" round custom-style="background: #2BB673; border-color: #2BB673; font-size: 26rpx; padding: 0 36rpx; height: 64rpx; line-height: 64rpx;"
                 bindtap="goLogin">立即登录</van-button>
   </view>
 
@@ -39,7 +39,7 @@
       </view>
     </view>
     <view class="plan-action">
-      <van-button type="primary" round block custom-style="background: linear-gradient(135deg, #FF6B35, #FF8F65); border: none; height: 80rpx; font-size: 30rpx;"
+      <van-button type="primary" round block custom-style="background: linear-gradient(135deg, #2BB673, #5BCFAB); border: none; height: 80rpx; font-size: 30rpx;"
                   bindtap="onStartTodayWorkout">
         开始训练
       </van-button>
@@ -115,6 +115,6 @@
         <text class="checkin-desc">完成训练后别忘了打卡哦</text>
       </view>
     </view>
-    <van-button type="primary" size="small" round custom-style="background: #FF6B35; border-color: #FF6B35;">打卡</van-button>
+    <van-button type="primary" size="small" round custom-style="background: #2BB673; border-color: #2BB673;">打卡</van-button>
   </view>
 </view>

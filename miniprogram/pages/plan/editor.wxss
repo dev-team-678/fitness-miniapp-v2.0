@@ -13,7 +13,7 @@
   color: #1A1A2E;
   margin-bottom: 20rpx;
   padding-left: 10rpx;
-  border-left: 6rpx solid #FF6B35;
+  border-left: 6rpx solid #2BB673;
 }
 
 .form-item {
@@ -143,9 +143,9 @@
   justify-content: center;
   gap: 12rpx;
   padding: 24rpx;
-  border: 2rpx dashed #FF6B35;
+  border: 2rpx dashed #2BB673;
   border-radius: 8rpx;
-  color: #FF6B35;
+  color: #2BB673;
   font-size: 28rpx;
 }
 
@@ -199,7 +199,7 @@
 }
 
 .filter-item.active {
-  background: #FF6B35;
+  background: #2BB673;
   color: #fff;
 }
 
@@ -220,7 +220,7 @@
 }
 
 .exercise-select-item.selected {
-  border-color: #FF6B35;
+  border-color: #2BB673;
   background: #FFF5F0;
 }
 

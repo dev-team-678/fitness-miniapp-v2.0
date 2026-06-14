@@ -1,7 +1,7 @@
 <view class="container">
   <!-- 筛选标签 -->
   <view class="filter-tabs">
-    <van-tabs active="{{activeTab}}" bind:change="onTabChange" color="#FF6B35" title-active-color="#FF6B35">
+    <van-tabs active="{{activeTab}}" bind:change="onTabChange" color="#2BB673" title-active-color="#2BB673">
       <van-tab title="推荐计划" name="system"></van-tab>
       <van-tab title="全部计划" name="all"></van-tab>
       <van-tab title="我的计划" name="my"></van-tab>
@@ -51,6 +51,6 @@
 
   <!-- 创建按钮 -->
   <view class="create-btn-wrapper">
-    <van-button type="primary" round color="#FF6B35" icon="plus" bindtap="goCreate">创建计划</van-button>
+    <van-button type="primary" round color="#2BB673" icon="plus" bindtap="goCreate">创建计划</van-button>
   </view>
 </view>

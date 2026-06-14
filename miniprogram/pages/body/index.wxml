@@ -75,6 +75,6 @@
   </view>
 
   <van-button type="primary" block round fixed="{{true}}" bottom="{{true}}"
-              custom-style="background: linear-gradient(135deg, #FF6B35, #FF8F65); border: none; margin: 24rpx;"
+              custom-style="background: linear-gradient(135deg, #2BB673, #5BCFAB); border: none; margin: 24rpx;"
               bindtap="goRecord">记录数据</van-button>
 </view>

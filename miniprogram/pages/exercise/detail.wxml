@@ -27,7 +27,7 @@
       <text class="demo-icon">💪</text>
     </view>
     <view class="favorite-btn" catchtap="onToggleFavorite">
-      <van-icon name="{{isFavorite ? 'star' : 'star-o'}}" size="48rpx" color="{{isFavorite ? '#FF6B35' : '#FFF'}}" />
+      <van-icon name="{{isFavorite ? 'star' : 'star-o'}}" size="48rpx" color="{{isFavorite ? '#2BB673' : '#FFF'}}" />
     </view>
   </view>
 
@@ -84,4 +84,4 @@
   </view>
 </view>
 
-<van-loading wx:if="{{loading}}" type="spinner" color="#FF6B35" size="48px" custom-style="display:flex;justify-content:center;padding:120rpx 0;" />
+<van-loading wx:if="{{loading}}" type="spinner" color="#2BB673" size="48px" custom-style="display:flex;justify-content:center;padding:120rpx 0;" />

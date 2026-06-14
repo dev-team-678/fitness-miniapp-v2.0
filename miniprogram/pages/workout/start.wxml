@@ -72,8 +72,8 @@
       <view class="set-input-header">
         <text class="set-input-label">第 {{currentSetIndex + 1}} 组</text>
         <van-radio-group value="{{currentSetType}}" bind:change="onSetTypeChange" direction="horizontal">
-          <van-radio name="normal" checked-color="#FF6B35" icon-size="28rpx">正式</van-radio>
-          <van-radio name="warmup" checked-color="#FF6B35" icon-size="28rpx">热身</van-radio>
+          <van-radio name="normal" checked-color="#2BB673" icon-size="28rpx">正式</van-radio>
+          <van-radio name="warmup" checked-color="#2BB673" icon-size="28rpx">热身</van-radio>
         </van-radio-group>
       </view>
 
@@ -93,7 +93,7 @@
       </view>
 
       <van-button type="primary" block round
-                  custom-style="background: linear-gradient(135deg, #FF6B35, #FF8F65); border: none; height: 88rpx; margin-top: 24rpx;"
+                  custom-style="background: linear-gradient(135deg, #2BB673, #5BCFAB); border: none; height: 88rpx; margin-top: 24rpx;"
                   bindtap="onCompleteSet">
         完成本组 💪
       </van-button>
@@ -106,7 +106,7 @@
                   disabled="{{currentExerciseIndex === 0}}"
                   bindtap="onPrevExercise">上一个动作</van-button>
       <van-button size="small" plain round type="primary"
-                  custom-style="color: #FF6B35; border-color: #FF6B35;"
+                  custom-style="color: #2BB673; border-color: #2BB673;"
                   disabled="{{currentExerciseIndex >= exercises.length - 1}}"
                   bindtap="onNextExercise">下一个动作</van-button>
     </view>
@@ -132,7 +132,7 @@
       </view>
       <view class="rest-actions">
         <van-button size="small" round plain bindtap="onSkipRest"
-                    custom-style="color: #FF6B35; border-color: #FF6B35; padding: 0 40rpx;">跳过</van-button>
+                    custom-style="color: #2BB673; border-color: #2BB673; padding: 0 40rpx;">跳过</van-button>
       </view>
     </view>
   </view>
@@ -153,7 +153,7 @@
                  bindinput="onNotesInput" maxlength="200"
                  custom-style="margin: 24rpx 0;" />
       <van-button type="primary" block round
-                  custom-style="background: #FF6B35; border: none; height: 88rpx;"
+                  custom-style="background: #2BB673; border: none; height: 88rpx;"
                   bindtap="onCompleteWorkout">完成训练 🎉</van-button>
     </view>
   </van-popup>

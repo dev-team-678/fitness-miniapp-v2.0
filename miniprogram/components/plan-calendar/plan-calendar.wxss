@@ -85,7 +85,7 @@
 
 .exercise-count {
   font-size: 20rpx;
-  color: #FF6B35;
+  color: #2BB673;
 }
 
 .complete-badge {

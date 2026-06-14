@@ -2,7 +2,7 @@
 .month-stats { padding: 32rpx; }
 .stats-grid { display: flex; justify-content: space-around; margin-top: 16rpx; }
 .stat-item { display: flex; flex-direction: column; align-items: center; }
-.stat-value { font-size: 44rpx; font-weight: 700; color: #FF6B35; }
+.stat-value { font-size: 44rpx; font-weight: 700; color: #2BB673; }
 .stat-label { font-size: 22rpx; color: #999; margin-top: 4rpx; }
 .history-list { margin-top: 16rpx; }
 .history-item { padding: 28rpx 32rpx; }

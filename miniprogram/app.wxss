@@ -1,27 +1,27 @@
 /* 全局样式 */
 page {
-  background-color: #F5F5FA;
+  background-color: #F5FBF7;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 28rpx;
-  color: #1A1A2E;
+  color: #1A2E2A;
   line-height: 1.5;
 }
 
-/* 主色变量 */
+/* 主色变量 - 薄荷绿清新风 */
 view {
-  --primary-color: #FF6B35;
-  --primary-light: #FF8F65;
-  --primary-dark: #E55A2B;
-  --secondary-color: #1A1A2E;
-  --bg-color: #F5F5FA;
+  --primary-color: #2BB673;
+  --primary-light: #5BCFAB;
+  --primary-dark: #229B62;
+  --secondary-color: #1A2E2A;
+  --bg-color: #F5FBF7;
   --card-bg: #FFFFFF;
   --success-color: #4CAF50;
   --warning-color: #FF9800;
   --danger-color: #F44336;
-  --text-primary: #1A1A2E;
-  --text-secondary: #666666;
-  --text-tertiary: #999999;
-  --border-color: #EEEEEE;
+  --text-primary: #1A2E2A;
+  --text-secondary: #5A6B66;
+  --text-tertiary: #9AA8A4;
+  --border-color: #E5EFEA;
   --card-radius: 16rpx;
   --btn-radius: 8rpx;
 }
@@ -46,13 +46,13 @@ view {
 .section-title {
   font-size: 32rpx;
   font-weight: 600;
-  color: #1A1A2E;
+  color: #1A2E2A;
   margin-bottom: 24rpx;
 }
 
 /* 按钮样式 */
 .btn-primary {
-  background: linear-gradient(135deg, #FF6B35, #FF8F65);
+  background: linear-gradient(135deg, #2BB673, #5BCFAB);
   color: #FFFFFF;
   border-radius: 8rpx;
   font-size: 30rpx;
@@ -69,8 +69,8 @@ view {
 
 .btn-secondary {
   background: #FFFFFF;
-  color: #FF6B35;
-  border: 2rpx solid #FF6B35;
+  color: #2BB673;
+  border: 2rpx solid #2BB673;
   border-radius: 8rpx;
   font-size: 28rpx;
   font-weight: 500;
@@ -89,8 +89,8 @@ view {
 }
 
 .tag-primary {
-  background: rgba(255, 107, 53, 0.1);
-  color: #FF6B35;
+  background: rgba(43, 182, 115, 0.1);
+  color: #2BB673;
 }
 
 .tag-success {
@@ -166,7 +166,7 @@ view {
 /* 分割线 */
 .divider {
   height: 1rpx;
-  background: #EEEEEE;
+  background: #E5EFEA;
   margin: 24rpx 0;
 }
 

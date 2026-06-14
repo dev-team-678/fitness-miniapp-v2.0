@@ -50,7 +50,7 @@
 .stat-value {
   font-size: 32rpx;
   font-weight: 700;
-  color: #FF6B35;
+  color: #2BB673;
 }
 
 .stat-label {

@@ -42,7 +42,7 @@ Page({
       title: '提示',
       content: '该功能需要登录后才能使用',
       confirmText: '去登录',
-      confirmColor: '#FF6B35',
+      confirmColor: '#2BB673',
       success: (res) => {
         if (res.confirm) {
           wx.navigateTo({ url: '/pages/login/index' });

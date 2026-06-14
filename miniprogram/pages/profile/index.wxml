@@ -6,7 +6,7 @@
       <image class="avatar" src="/images/default-avatar.png" mode="aspectFill"></image>
       <text class="nickname">游客模式</text>
       <text class="guest-hint">登录后查看个人信息和使用全部功能</text>
-      <van-button type="primary" round block custom-style="background: #FF6B35; border-color: #FF6B35; margin-top: 24rpx; height: 80rpx;"
+      <van-button type="primary" round block custom-style="background: #2BB673; border-color: #2BB673; margin-top: 24rpx; height: 80rpx;"
                   bindtap="goLogin">立即登录</van-button>
     </view>
   </view>

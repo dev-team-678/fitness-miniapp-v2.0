@@ -290,7 +290,7 @@ Page({
       title: '结束训练',
       content: '确定要结束本次训练吗？',
       confirmText: '结束',
-      confirmColor: '#FF6B35',
+      confirmColor: '#2BB673',
       success: (res) => {
         if (res.confirm) {
           this.setData({ showFeelingSheet: true });
