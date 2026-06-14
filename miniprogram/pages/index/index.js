@@ -142,7 +142,13 @@ Page({
   async loadCheckinStreak() {
     try {
       const res = await request({ url: '/miniapp/checkin/streak' });
-      this.setData({ streakDays: res.currentStreak || 0 });
+      const today = util.formatDate(new Date());
+      const lastDate = res.lastCheckinDate || '';
+      // 最后一次打卡若是今天,首页"今日打卡"按钮隐藏
+      this.setData({
+        streakDays: res.currentStreak || 0,
+        todayCheckedIn: lastDate === today
+      });
     } catch (err) {
       console.error('加载打卡失败:', err);
     }
@@ -240,6 +246,11 @@ Page({
 
   goProfile() {
     wx.switchTab({ url: '/pages/profile/index' });
+  },
+
+  goAchievements() {
+    if (!this.requireLogin()) return;
+    wx.navigateTo({ url: '/pages/profile/achievements' });
   },
 
   goLogin() {

@@ -9,6 +9,8 @@
                  placeholder="选择性别" readonly bindtap="onShowGenderPicker" right-icon="arrow" />
       <van-field label="生日" value="{{birthday}}" placeholder="选择生日"
                  readonly bindtap="onShowDatePicker" right-icon="arrow" />
+      <van-field label="邮箱" value="{{email}}" placeholder="选填,用于接收系统公告"
+                 bindinput="onEmailInput" type="text" />
     </van-cell-group>
   </view>
 

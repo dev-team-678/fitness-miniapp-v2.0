@@ -88,21 +88,37 @@
   <view class="quick-actions card">
     <view class="section-title">⚡ 快速入口</view>
     <view class="action-grid">
-      <view class="action-item" bindtap="goBodyRecord">
-        <view class="action-icon-box">⚖️</view>
-        <text class="action-text">记录体重</text>
+      <view class="action-item" bindtap="onStartTodayWorkout">
+        <view class="action-icon-box">🏋️</view>
+        <text class="action-text">今日训练</text>
       </view>
-      <view class="action-item" bindtap="goExerciseList">
-        <view class="action-icon-box">💪</view>
-        <text class="action-text">动作库</text>
+      <view class="action-item" bindtap="goAIPlanGenerator">
+        <view class="action-icon-box ai-icon">🤖</view>
+        <text class="action-text">AI 生成计划</text>
+      </view>
+      <view class="action-item" bindtap="goPlanList">
+        <view class="action-icon-box">📅</view>
+        <text class="action-text">我的计划</text>
       </view>
       <view class="action-item" bindtap="goWorkoutHistory">
         <view class="action-icon-box">📋</view>
         <text class="action-text">训练历史</text>
       </view>
+      <view class="action-item" bindtap="goExerciseList">
+        <view class="action-icon-box">💪</view>
+        <text class="action-text">动作库</text>
+      </view>
+      <view class="action-item" bindtap="goBodyRecord">
+        <view class="action-icon-box">⚖️</view>
+        <text class="action-text">记录体重</text>
+      </view>
       <view class="action-item" bindtap="goBodyIndex">
         <view class="action-icon-box">📈</view>
         <text class="action-text">身体数据</text>
+      </view>
+      <view class="action-item" bindtap="goAchievements">
+        <view class="action-icon-box">🏆</view>
+        <text class="action-text">我的成就</text>
       </view>
     </view>
   </view>

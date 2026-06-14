@@ -3,8 +3,8 @@
  * 替代原有云函数 callFunction 调用方式
  */
 // 本地调试使用：http://localhost:8080
-const BASE_URL = 'http://localhost:8080';
-// const BASE_URL = 'https://tech-vance.cn/api/v1';
+// const BASE_URL = 'http://localhost:8080';
+const BASE_URL = 'https://tech-vance.cn/api/v1';
 
 // Token 管理
 const tokenManager = {

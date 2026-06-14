@@ -248,7 +248,7 @@
 .action-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20rpx;
+  gap: 20rpx 16rpx;
 }
 
 .action-item {
@@ -276,6 +276,29 @@
   justify-content: center;
   font-size: 40rpx;
   line-height: 1;
+  position: relative;
+  overflow: visible;
+}
+
+/* AI 入口:与其他 4 项同底色,仅用 AI 角标和文字主色作差异化 */
+.action-icon-box.ai-icon::after {
+  content: 'AI';
+  position: absolute;
+  top: -6rpx;
+  right: -10rpx;
+  font-size: 18rpx;
+  font-weight: 700;
+  color: #FFFFFF;
+  background: #FAAD14;
+  padding: 2rpx 10rpx;
+  border-radius: 999rpx;
+  line-height: 1.4;
+  box-shadow: 0 2rpx 6rpx rgba(250, 173, 20, 0.4);
+}
+
+.action-item:has(.ai-icon) .action-text {
+  color: var(--primary-color);
+  font-weight: 600;
 }
 
 .action-text {

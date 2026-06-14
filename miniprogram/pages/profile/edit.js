@@ -8,6 +8,7 @@ Page({
     nickname: '',
     gender: 0,
     birthday: '',
+    email: '',
     height: '',
     weight: '',
     targetWeight: '',
@@ -42,6 +43,7 @@ Page({
           nickname: user.nickname || '',
           gender: user.gender || 0,
           birthday: user.birthday || '',
+          email: user.email || '',
           height: user.heightCm ? String(user.heightCm) : '',
           weight: user.currentWeightKg ? String(user.currentWeightKg) : '',
           targetWeight: user.targetWeightKg ? String(user.targetWeightKg) : '',
@@ -57,6 +59,7 @@ Page({
   },
 
   onNicknameInput(e) { this.setData({ nickname: e.detail }); },
+  onEmailInput(e) { this.setData({ email: e.detail }); },
   onHeightInput(e) { this.setData({ height: e.detail }); },
   onWeightInput(e) { this.setData({ weight: e.detail }); },
   onTargetWeightInput(e) { this.setData({ targetWeight: e.detail }); },
@@ -106,7 +109,7 @@ Page({
   onWorkoutDurationChange(e) { this.setData({ workoutDuration: e.detail }); },
 
   async onSubmit() {
-    const { nickname, gender, birthday, height, weight, targetWeight,
+    const { nickname, gender, birthday, email, height, weight, targetWeight,
             fitnessGoal, fitnessLevel, workoutDays, workoutDuration } = this.data;
 
     if (!nickname.trim()) {
@@ -122,6 +125,7 @@ Page({
           nickname: nickname.trim(),
           gender,
           birthday: birthday || null,
+          email: (email || '').trim(),
           heightCm: parseFloat(height) || null,
           currentWeightKg: parseFloat(weight) || null,
           targetWeightKg: parseFloat(targetWeight) || null,

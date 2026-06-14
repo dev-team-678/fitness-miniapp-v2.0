@@ -6,9 +6,9 @@ Page({
     goal: 'gain_muscle',
     fitnessLevel: 'beginner',
     daysPerWeek: 3,
-    durationWeeks: 8,
+    durationWeeks: 4,
     durationOptions: [4, 6, 8, 10, 12],
-    durationIndex: 2,
+    durationIndex: 0,
     equipmentOptions: [
       { name: 'barbell', label: '杠铃', selected: true },
       { name: 'dumbbell', label: '哑铃', selected: true },
@@ -133,6 +133,6 @@ Page({
   },
 
   goToPlanList() {
-    wx.switchTab({ url: '/pages/plan/list' });
+    wx.navigateTo({ url: '/pages/plan/list' });
   }
 });
