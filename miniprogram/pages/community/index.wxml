@@ -53,7 +53,7 @@
         />
       </view>
 
-      <view wx:if="{{item.workoutLogId}}" class="workout-share" data-id="{{item.workoutLogId}}">
+      <view wx:if="{{item.workoutLogId}}" class="workout-share" data-id="{{item.workoutLogId}}" bindtap="goToWorkoutSummary">
         <view class="workout-icon">🏋️</view>
         <text class="workout-text">查看训练记录</text>
         <text class="arrow">›</text>
@@ -75,10 +75,10 @@
           <text class="action-count">{{item.commentCount || 0}}</text>
         </view>
 
-        <view class="action-item" data-id="{{item.id}}" bindtap="onShare">
+        <button class="action-item share-btn" data-id="{{item.id}}" open-type="share" plain size="mini" hover-class="none">
           <text class="action-icon">📤</text>
           <text class="action-text">分享</text>
-        </view>
+        </button>
       </view>
     </view>
 

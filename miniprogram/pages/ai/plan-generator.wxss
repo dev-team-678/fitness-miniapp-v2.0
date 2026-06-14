@@ -2,12 +2,20 @@
   min-height: 100vh;
   background: #f5f5f5;
   padding: 30rpx;
+  overflow: visible;
 }
 
 .step-area {
   background: #fff;
   border-radius: 20rpx;
   padding: 40rpx;
+  overflow: visible;
+}
+
+.step-area .van-slider,
+.step-area .van-slider__button-wrapper {
+  position: relative;
+  z-index: 2;
 }
 
 .step-title {
@@ -19,6 +27,16 @@
 
 .form-item {
   margin-bottom: 40rpx;
+  overflow: visible;
+}
+
+.slider-wrap {
+  /* 扩大可点击区,确保 thumb 之外也能接收 touch */
+  padding: 40rpx 0;
+  margin: 0 -20rpx;
+  overflow: visible;
+  position: relative;
+  z-index: 2;
 }
 
 .form-label {

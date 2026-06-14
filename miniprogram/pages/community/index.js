@@ -135,6 +135,14 @@ Page({
     });
   },
 
+  goToWorkoutSummary(e) {
+    const workoutLogId = e.currentTarget.dataset.id;
+    if (!workoutLogId) return;
+    wx.navigateTo({
+      url: `/pages/workout/summary?id=${workoutLogId}`
+    });
+  },
+
   previewImage(e) {
     const { imgs, index } = e.currentTarget.dataset;
     wx.previewImage({
@@ -143,20 +151,15 @@ Page({
     });
   },
 
-  async onShare(e) {
-    const postId = e.currentTarget.dataset.id;
-    const post = this.data.posts.find(p => p.id === postId);
-    if (!post) return;
-
-    if (post.workoutLogId) {
-      wx.navigateTo({
-        url: `/pages/workout/summary?id=${post.workoutLogId}`
-      });
-    } else {
-      wx.showShareMenu({
-        withShareTicket: true,
-        menus: ['shareAppMessage', 'shareTimeline']
-      });
-    }
+  onShareAppMessage(e) {
+    const postId = e.target && e.target.dataset ? e.target.dataset.id : null;
+    const post = postId ? this.data.posts.find(p => p.id === postId) : null;
+    const title = post && post.content
+      ? post.content.slice(0, 30)
+      : '来看看这条健身动态';
+    return {
+      title,
+      path: postId ? `/pages/community/detail?id=${postId}` : '/pages/community/index'
+    };
   }
 });

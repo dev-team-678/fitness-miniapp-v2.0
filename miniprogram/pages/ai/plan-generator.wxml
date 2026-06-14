@@ -31,7 +31,9 @@
 
     <view class="form-item">
       <view class="form-label">每周训练天数</view>
-      <van-slider value="{{daysPerWeek}}" min="2" max="6" step="1" bind:change="onDaysChange" />
+      <view class="slider-wrap">
+        <van-slider value="{{daysPerWeek}}" min="2" max="6" step="1" use-slot="{{false}}" bar-height="4px" active-color="#667eea" inactive-color="#e5e6eb" bind:change="onDaysChange" bind:drag="onDaysDrag" />
+      </view>
       <view class="slider-value">{{daysPerWeek}} 天/周</view>
     </view>
 

@@ -183,6 +183,28 @@
   color: #ff4757;
 }
 
+.share-btn {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  line-height: 1;
+  margin: 0;
+  padding: 10rpx 20rpx !important;
+  font-size: 28rpx;
+  color: inherit;
+  box-sizing: border-box;
+  min-height: 0;
+  height: auto;
+}
+
+.share-btn::after {
+  border: none !important;
+}
+
+.share-btn::before {
+  border: none !important;
+}
+
 .action-icon {
   font-size: 32rpx;
   margin-right: 8rpx;

@@ -9,6 +9,8 @@
   flex: 1;
   padding: 20rpx;
   padding-bottom: 160rpx;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .date-header {
@@ -27,6 +29,7 @@
   display: flex;
   margin-bottom: 30rpx;
   align-items: flex-start;
+  width: 100%;
 }
 
 .message.user {
@@ -64,14 +67,15 @@
 
 .message-content {
   margin: 0 20rpx;
+  min-width: 0;
 }
 
 .message.user .message-content {
-  max-width: 500rpx;
+  max-width: 70%;
 }
 
 .message.assistant .assistant-bubble {
-  max-width: 620rpx;
+  max-width: calc(100% - 110rpx);
 }
 
 /* 用户消息气泡 */

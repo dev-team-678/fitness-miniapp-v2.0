@@ -31,6 +31,10 @@ Page({
   },
 
   onDaysChange(e) {
+    this.setData({ daysPerWeek: e.detail });
+  },
+
+  onDaysDrag(e) {
     this.setData({ daysPerWeek: e.detail.value });
   },
 
