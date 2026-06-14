@@ -30,7 +30,7 @@
                 loading="{{saving}}"
                 loading-text="保存中..."
                 disabled="{{saving}}"
-                custom-style="background: #2BB673; border-color: #2BB673; height: 88rpx; font-size: 32rpx;"
+                custom-style="background: #2FA866; border-color: #2FA866; height: 88rpx; font-size: 32rpx;"
                 bind:click="onSave">
       保存并进入
     </van-button>

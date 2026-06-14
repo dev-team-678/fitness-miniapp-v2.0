@@ -12,7 +12,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(43, 182, 115, 0.1);
+  background: rgba(47, 168, 102, 0.1);
   border-radius: 16rpx;
   margin-right: 24rpx;
   flex-shrink: 0;

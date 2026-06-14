@@ -57,7 +57,7 @@
 .info-value {
   font-size: 40rpx;
   font-weight: 700;
-  color: #2BB673;
+  color: #2FA866;
 }
 
 .info-label {
@@ -90,7 +90,7 @@
 }
 
 .week-tab.active {
-  background: #2BB673;
+  background: #2FA866;
   color: #FFFFFF;
 }
 
@@ -125,8 +125,8 @@
 
 .day-tag {
   font-size: 24rpx;
-  color: #2BB673;
-  background: rgba(43, 182, 115, 0.1);
+  color: #2FA866;
+  background: rgba(47, 168, 102, 0.1);
   padding: 4rpx 16rpx;
   border-radius: 6rpx;
 }
@@ -156,8 +156,8 @@
   width: 48rpx;
   height: 48rpx;
   border-radius: 50%;
-  background: rgba(43, 182, 115, 0.1);
-  color: #2BB673;
+  background: rgba(47, 168, 102, 0.1);
+  color: #2FA866;
   display: flex;
   align-items: center;
   justify-content: center;

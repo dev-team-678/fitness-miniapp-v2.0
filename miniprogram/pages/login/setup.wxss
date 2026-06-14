@@ -62,11 +62,11 @@
   width: 48rpx;
   height: 48rpx;
   border-radius: 50%;
-  background: #2BB673;
+  background: #2FA866;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2rpx 8rpx rgba(43, 182, 115,0.4);
+  box-shadow: 0 2rpx 8rpx rgba(47, 168, 102,0.4);
 }
 
 .edit-icon-text {

@@ -17,9 +17,9 @@
 .desc-text { font-size: 28rpx; color: #666; line-height: 1.8; }
 .step-list { display: flex; flex-direction: column; gap: 20rpx; }
 .step-item { display: flex; gap: 16rpx; }
-.step-num { width: 48rpx; height: 48rpx; border-radius: 50%; background: #2BB673; color: #FFF; font-size: 24rpx; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.step-num { width: 48rpx; height: 48rpx; border-radius: 50%; background: #2FA866; color: #FFF; font-size: 24rpx; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .step-text { font-size: 28rpx; color: #333; line-height: 1.6; }
 .tip-list { display: flex; flex-direction: column; gap: 12rpx; }
 .tip-item { display: flex; gap: 12rpx; }
-.tip-dot { color: #2BB673; font-size: 28rpx; }
+.tip-dot { color: #2FA866; font-size: 28rpx; }
 .tip-text { font-size: 28rpx; color: #666; line-height: 1.6; }

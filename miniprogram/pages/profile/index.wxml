@@ -6,7 +6,8 @@
       <image class="avatar" src="/images/default-avatar.png" mode="aspectFill"></image>
       <text class="nickname">游客模式</text>
       <text class="guest-hint">登录后查看个人信息和使用全部功能</text>
-      <van-button type="primary" round block custom-style="background: #2BB673; border-color: #2BB673; margin-top: 24rpx; height: 80rpx;"
+      <van-button type="primary" round block
+                  custom-style="background: linear-gradient(180deg, #36BC76, #2FA866); border: none; margin-top: 32rpx; height: 88rpx; box-shadow: 0 4rpx 12rpx rgba(47,168,102,0.22);"
                   bindtap="goLogin">立即登录</van-button>
     </view>
   </view>
@@ -22,39 +23,41 @@
         <view class="profile-tag" wx:if="{{levelLabel}}">{{levelLabel}}</view>
       </view>
     </view>
+  </view>
 
-    <!-- 统计数据 -->
-    <view class="stats-row">
-      <view class="stat-item">
-        <text class="stat-num">{{stats.totalWorkouts}}</text>
-        <text class="stat-label">训练次数</text>
-      </view>
-      <view class="stat-divider"></view>
-      <view class="stat-item">
-        <text class="stat-num">{{stats.streakDays}}</text>
-        <text class="stat-label">连续天数</text>
-      </view>
-      <view class="stat-divider"></view>
-      <view class="stat-item">
-        <text class="stat-num">{{stats.totalDuration}}</text>
-        <text class="stat-label">总时长(h)</text>
-      </view>
+  <!-- 统计数据 -->
+  <view class="stats-card" wx:if="{{isLoggedIn}}">
+    <view class="stat-item">
+      <text class="stat-num">{{stats.totalWorkouts}}</text>
+      <text class="stat-label">训练次数</text>
     </view>
-
-    <view class="edit-btn" bindtap="goEdit">
-      <van-icon name="edit" size="32rpx" /> 编辑资料
+    <view class="stat-divider"></view>
+    <view class="stat-item">
+      <text class="stat-num">{{stats.streakDays}}</text>
+      <text class="stat-label">连续天数</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item">
+      <text class="stat-num">{{stats.totalDuration}}</text>
+      <text class="stat-label">总时长(h)</text>
     </view>
   </view>
 
+  <view class="edit-btn" wx:if="{{isLoggedIn}}" bindtap="goEdit">
+    <van-icon name="edit" size="28rpx" /> 编辑资料
+  </view>
+
   <!-- 菜单列表 -->
-  <view class="menu-card card">
+  <view class="menu-card">
     <view class="menu-item" wx:for="{{menuList}}" wx:key="title"
           bindtap="onMenuTap" data-url="{{item.url}}">
       <view class="menu-left">
-        <text class="menu-icon">{{item.icon}}</text>
+        <view class="menu-icon-box">{{item.icon}}</view>
         <text class="menu-title">{{item.title}}</text>
       </view>
-      <van-icon name="arrow" color="#CCC" size="20" />
+      <view class="menu-right">
+        <van-icon name="arrow" color="#C9CDD4" size="14" />
+      </view>
     </view>
   </view>
 

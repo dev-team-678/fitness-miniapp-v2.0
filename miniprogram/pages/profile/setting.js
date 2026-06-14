@@ -111,7 +111,7 @@ Page({
     wx.showModal({
       title: '清除缓存',
       content: `当前缓存 ${this.data.cacheSize}，确定清除？`,
-      confirmColor: '#2BB673',
+      confirmColor: '#2FA866',
       success: (res) => {
         if (res.confirm) {
           const token = wx.getStorageSync('jwt_token');
@@ -166,7 +166,7 @@ Page({
     wx.showModal({
       title: '退出登录',
       content: '确定退出当前账号？',
-      confirmColor: '#2BB673',
+      confirmColor: '#2FA866',
       success: (res) => {
         if (res.confirm) {
           wx.removeStorageSync('jwt_token');

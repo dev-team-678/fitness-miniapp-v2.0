@@ -4,7 +4,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(180deg, #2BB673 0%, #F5F5FA 100%);
+  background: linear-gradient(180deg, #2FA866 0%, #F5F5FA 100%);
   padding: 0 60rpx;
 }
 
@@ -41,7 +41,7 @@
 
 .login-btn {
   background-color: #ffffff !important;
-  color: #2BB673 !important;
+  color: #2FA866 !important;
   font-size: 32rpx;
   font-weight: bold;
   height: 88rpx;
@@ -73,8 +73,8 @@
 }
 
 .checkbox.checked {
-  background: #2BB673;
-  border-color: #2BB673;
+  background: #2FA866;
+  border-color: #2FA866;
 }
 
 .check-icon {

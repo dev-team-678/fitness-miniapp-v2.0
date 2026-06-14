@@ -86,7 +86,7 @@
 
         <view class="day-action" wx:if="{{item.exercises.length > 0}}">
           <van-button type="primary" round block size="small" 
-                      custom-style="background: #2BB673; border-color: #2BB673;"
+                      custom-style="background: #2FA866; border-color: #2FA866;"
                       bindtap="startWorkout" data-day-id="{{item.id}}">
             开始训练
           </van-button>

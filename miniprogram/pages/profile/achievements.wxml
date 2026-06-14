@@ -5,7 +5,7 @@
       <view class="progress-title">成就进度</view>
       <view class="progress-count">{{stats.unlocked}}/{{stats.total}}</view>
     </view>
-    <van-progress percentage="{{stats.progress}}" stroke-height="8" color="#2BB673" track-color="#F5F5FA"/>
+    <van-progress percentage="{{stats.progress}}" stroke-height="8" color="#2FA866" track-color="#F5F5FA"/>
     <view class="progress-text">已解锁 {{stats.progress}}% 的成就</view>
   </view>
 

@@ -98,7 +98,7 @@
 
 .ex-sets {
   font-size: 26rpx;
-  color: #2BB673;
+  color: #2FA866;
   font-weight: 500;
   margin-left: 16rpx;
 }
@@ -159,11 +159,11 @@
 
 .btn-regen {
   flex: 1;
-  border-color: #2BB673 !important;
-  color: #2BB673 !important;
+  border-color: #2FA866 !important;
+  color: #2FA866 !important;
 }
 
 .btn-confirm {
   flex: 2;
-  background: #2BB673 !important;
+  background: #2FA866 !important;
 }

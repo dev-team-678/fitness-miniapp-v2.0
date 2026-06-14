@@ -73,7 +73,7 @@
             placeholder="输入训练日名称"
           />
           <view class="day-actions">
-            <switch checked="{{!item.isRestDay}}" bindchange="toggleRestDay" data-index="{{index}}" color="#2BB673"/>
+            <switch checked="{{!item.isRestDay}}" bindchange="toggleRestDay" data-index="{{index}}" color="#2FA866"/>
             <text class="rest-text">{{item.isRestDay ? '休息日' : '训练日'}}</text>
           </view>
         </view>
@@ -94,7 +94,7 @@
 
           <!-- 添加动作按钮 -->
           <view class="add-exercise-btn" bindtap="openExerciseModal" data-index="{{index}}">
-            <van-icon name="plus" color="#2BB673"/>
+            <van-icon name="plus" color="#2FA866"/>
             <text>添加动作</text>
           </view>
         </view>
@@ -104,7 +104,7 @@
 
   <!-- 保存按钮 -->
   <view class="footer-actions">
-    <van-button type="primary" block color="#2BB673" bindtap="savePlan">创建计划</van-button>
+    <van-button type="primary" block color="#2FA866" bindtap="savePlan">创建计划</van-button>
   </view>
 </view>
 
@@ -132,7 +132,7 @@
           <text class="exercise-select-name">{{item.name}}</text>
           <text class="exercise-select-type">{{item.exerciseType === 'strength' ? '力量' : '有氧'}} · {{item.equipment || '徒手'}}</text>
         </view>
-        <van-icon name="success" color="#2BB673" wx:if="{{currentExercise && currentExercise.id === item.id}}"/>
+        <van-icon name="success" color="#2FA866" wx:if="{{currentExercise && currentExercise.id === item.id}}"/>
       </view>
     </scroll-view>
 
@@ -152,7 +152,7 @@
           <van-stepper value="{{exerciseRest}}" min="0" max="300" step="15" bind:change="onRestInput"/>
         </view>
       </view>
-      <van-button type="primary" block color="#2BB673" size="small" bindtap="addExerciseToDay">确认添加</van-button>
+      <van-button type="primary" block color="#2FA866" size="small" bindtap="addExerciseToDay">确认添加</van-button>
     </view>
   </view>
 </van-popup>

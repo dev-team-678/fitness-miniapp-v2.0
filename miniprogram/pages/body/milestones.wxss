@@ -20,7 +20,7 @@
 .overview-value {
   font-size: 40rpx;
   font-weight: 700;
-  color: #2BB673;
+  color: #2FA866;
 }
 
 .overview-label {
@@ -40,7 +40,7 @@
   color: #1A1A2E;
   margin-bottom: 20rpx;
   padding-left: 10rpx;
-  border-left: 6rpx solid #2BB673;
+  border-left: 6rpx solid #2FA866;
 }
 
 .milestone-list {
@@ -60,7 +60,7 @@
 }
 
 .milestone-item.latest {
-  border-left-color: #2BB673;
+  border-left-color: #2FA866;
   background: linear-gradient(135deg, #FFF5F0 0%, #fff 100%);
 }
 
@@ -77,7 +77,7 @@
 }
 
 .milestone-item.latest .milestone-icon {
-  background: #2BB673;
+  background: #2FA866;
 }
 
 .milestone-content {

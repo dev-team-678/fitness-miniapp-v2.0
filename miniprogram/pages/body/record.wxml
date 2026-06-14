@@ -63,7 +63,7 @@
   <!-- 提交 -->
   <view class="submit-area">
     <van-button type="primary" block round
-                custom-style="background: linear-gradient(135deg, #2BB673, #5BCFAB); border: none; height: 88rpx;"
+                custom-style="background: linear-gradient(135deg, #2FA866, #36BC76); border: none; height: 88rpx;"
                 bindtap="onSubmit">保存记录</van-button>
   </view>
 </view>

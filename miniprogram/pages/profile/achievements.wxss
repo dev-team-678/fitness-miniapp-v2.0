@@ -23,7 +23,7 @@
 .progress-count {
   font-size: 32rpx;
   font-weight: 700;
-  color: #2BB673;
+  color: #2FA866;
 }
 
 .progress-text {
@@ -43,7 +43,7 @@
   color: #1A1A2E;
   margin-bottom: 20rpx;
   padding-left: 10rpx;
-  border-left: 6rpx solid #2BB673;
+  border-left: 6rpx solid #2FA866;
 }
 
 .achievement-grid {
@@ -91,7 +91,7 @@
 }
 
 .achievement-item.unlocked .achievement-icon {
-  background: #2BB673;
+  background: #2FA866;
 }
 
 .achievement-info {
@@ -115,7 +115,7 @@
 
 .achievement-time {
   font-size: 22rpx;
-  color: #2BB673;
+  color: #2FA866;
 }
 
 .achievement-status {

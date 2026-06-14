@@ -148,7 +148,7 @@ Page({
       }
 
       // 绘制数据线
-      ctx.strokeStyle = '#2BB673';
+      ctx.strokeStyle = '#2FA866';
       ctx.lineWidth = 2;
       ctx.lineJoin = 'round';
       ctx.beginPath();
@@ -157,7 +157,7 @@ Page({
         const x = w / 2;
         const y = h - padding - ((values[0] - min) / range) * (h - padding * 2);
         ctx.arc(x, y, 4, 0, Math.PI * 2);
-        ctx.fillStyle = '#2BB673';
+        ctx.fillStyle = '#2FA866';
         ctx.fill();
       } else {
         const stepX = (w - padding * 2) / (values.length - 1);
@@ -173,7 +173,7 @@ Page({
         ctx.stroke();
 
         // 绘制数据点
-        ctx.fillStyle = '#2BB673';
+        ctx.fillStyle = '#2FA866';
         values.forEach((val, i) => {
           const x = padding + i * stepX;
           const y = h - padding - ((val - min) / range) * (h - padding * 2);
@@ -183,7 +183,7 @@ Page({
           ctx.strokeStyle = '#FFF';
           ctx.lineWidth = 2;
           ctx.stroke();
-          ctx.strokeStyle = '#2BB673';
+          ctx.strokeStyle = '#2FA866';
           ctx.lineWidth = 2;
         });
       }

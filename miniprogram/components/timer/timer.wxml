@@ -11,7 +11,7 @@
     <!-- 进度环 -->
     <view class="progress-ring">
       <view class="ring-bg"></view>
-      <view class="ring-progress" style="background: conic-gradient(#2BB673 {{progressPercent}}%, transparent {{progressPercent}}%);"></view>
+      <view class="ring-progress" style="background: conic-gradient(#2FA866 {{progressPercent}}%, transparent {{progressPercent}}%);"></view>
       <view class="ring-inner"></view>
     </view>
 

@@ -27,8 +27,8 @@
 }
 
 .goal-item.active {
-  background: rgba(43, 182, 115, 0.1);
-  color: #2BB673;
+  background: rgba(47, 168, 102, 0.1);
+  color: #2FA866;
   font-weight: 500;
 }
 

@@ -47,14 +47,14 @@
 .timer-seconds {
   font-size: 96rpx;
   font-weight: 700;
-  color: #2BB673;
+  color: #2FA866;
   font-variant-numeric: tabular-nums;
 }
 
 .timer-separator {
   font-size: 80rpx;
   font-weight: 700;
-  color: #2BB673;
+  color: #2FA866;
   margin: 0 8rpx;
 }
 
@@ -106,7 +106,7 @@
 }
 
 .timer-btn-start {
-  background: linear-gradient(135deg, #2BB673, #5BCFAB);
+  background: linear-gradient(135deg, #2FA866, #36BC76);
   color: #FFFFFF;
 }
 
@@ -147,6 +147,6 @@
 }
 
 .preset-item.active {
-  background: rgba(43, 182, 115, 0.1);
-  color: #2BB673;
+  background: rgba(47, 168, 102, 0.1);
+  color: #2FA866;
 }

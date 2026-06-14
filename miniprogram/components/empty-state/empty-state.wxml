@@ -7,7 +7,7 @@
   <van-button type="primary" size="small" round 
               wx:if="{{buttonText}}" 
               bind:click="onAction"
-              custom-style="background: #2BB673; border-color: #2BB673; margin-top: 24rpx;">
+              custom-style="background: #2FA866; border-color: #2FA866; margin-top: 24rpx;">
     {{buttonText}}
   </van-button>
 </view>

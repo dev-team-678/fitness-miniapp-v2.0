@@ -59,12 +59,12 @@
 
   <!-- 加载状态 -->
   <view class="loading-more" wx:if="{{loading}}">
-    <van-loading type="spinner" color="#2BB673" size="24px">加载中...</van-loading>
+    <van-loading type="spinner" color="#2FA866" size="24px">加载中...</van-loading>
   </view>
 
   <!-- 空状态 -->
   <van-empty wx:if="{{list.length === 0 && !loading}}" image="search" description="暂无训练记录">
-    <van-button round type="primary" custom-style="background: #2BB673; border: none;" bindtap="goPlanList">
+    <van-button round type="primary" custom-style="background: #2FA866; border: none;" bindtap="goPlanList">
       开始训练
     </van-button>
   </van-empty>

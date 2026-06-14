@@ -218,7 +218,7 @@ Page({
       title: '提示',
       content: 'AI 健身助手需要登录后才能使用',
       confirmText: '去登录',
-      confirmColor: '#2BB673',
+      confirmColor: '#2FA866',
       success: (res) => {
         if (res.confirm) {
           wx.navigateTo({ url: '/pages/login/index' });

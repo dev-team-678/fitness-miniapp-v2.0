@@ -4,7 +4,7 @@
     <view class="section-title">⏰ 训练提醒</view>
     <van-cell-group>
       <van-cell title="开启提醒" label="每天定时提醒你训练">
-        <van-switch slot="right-icon" checked="{{reminderEnabled}}" bind:change="onReminderToggle" active-color="#2BB673" />
+        <van-switch slot="right-icon" checked="{{reminderEnabled}}" bind:change="onReminderToggle" active-color="#2FA866" />
       </van-cell>
       <van-cell title="提醒时间" value="{{reminderTime}}" is-link bindtap="onShowTimePicker" />
     </van-cell-group>
@@ -24,7 +24,7 @@
     />
     <view class="submit-area-inner">
       <van-button type="primary" round block size="small"
-                  custom-style="background: #2BB673; border: none;"
+                  custom-style="background: #2FA866; border: none;"
                   bindtap="onSubmitFeedback">提交反馈</van-button>
     </view>
   </view>

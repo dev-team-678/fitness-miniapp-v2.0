@@ -7,10 +7,10 @@
     </view>
     <view class="timer-actions">
       <view class="timer-btn" bindtap="onTogglePause">
-        <text>{{isPaused ? '▶️' : '⏸️'}}</text>
+        <van-icon name="{{isPaused ? 'play' : 'pause'}}" color="#FFFFFF" size="20" />
       </view>
       <view class="timer-btn finish-btn" bindtap="onFinishTraining">
-        <text>✅</text>
+        <van-icon name="success" color="#FFFFFF" size="20" />
       </view>
     </view>
   </view>
@@ -72,8 +72,8 @@
       <view class="set-input-header">
         <text class="set-input-label">第 {{currentSetIndex + 1}} 组</text>
         <van-radio-group value="{{currentSetType}}" bind:change="onSetTypeChange" direction="horizontal">
-          <van-radio name="normal" checked-color="#2BB673" icon-size="28rpx">正式</van-radio>
-          <van-radio name="warmup" checked-color="#2BB673" icon-size="28rpx">热身</van-radio>
+          <van-radio name="normal" checked-color="#2FA866" icon-size="28rpx">正式</van-radio>
+          <van-radio name="warmup" checked-color="#2FA866" icon-size="28rpx">热身</van-radio>
         </van-radio-group>
       </view>
 
@@ -93,20 +93,20 @@
       </view>
 
       <van-button type="primary" block round
-                  custom-style="background: linear-gradient(135deg, #2BB673, #5BCFAB); border: none; height: 88rpx; margin-top: 24rpx;"
+                  custom-style="background: linear-gradient(180deg, #36BC76, #2FA866); border: none; height: 96rpx; margin-top: 32rpx; font-size: 30rpx; font-weight: 500; box-shadow: 0 4rpx 12rpx rgba(47,168,102,0.22);"
                   bindtap="onCompleteSet">
-        完成本组 💪
+        完成本组
       </van-button>
     </view>
 
     <!-- 动作切换 -->
     <view class="nav-buttons">
       <van-button size="small" plain round
-                  custom-style="color: #666; border-color: #ddd;"
+                  custom-style="color: #4E5969; border-color: #E5E6EB;"
                   disabled="{{currentExerciseIndex === 0}}"
                   bindtap="onPrevExercise">上一个动作</van-button>
       <van-button size="small" plain round type="primary"
-                  custom-style="color: #2BB673; border-color: #2BB673;"
+                  custom-style="color: #2FA866; border-color: #2FA866;"
                   disabled="{{currentExerciseIndex >= exercises.length - 1}}"
                   bindtap="onNextExercise">下一个动作</van-button>
     </view>
@@ -132,7 +132,7 @@
       </view>
       <view class="rest-actions">
         <van-button size="small" round plain bindtap="onSkipRest"
-                    custom-style="color: #2BB673; border-color: #2BB673; padding: 0 40rpx;">跳过</van-button>
+                    custom-style="color: #2FA866; border-color: #2FA866; padding: 0 48rpx; height: 64rpx;">跳过休息</van-button>
       </view>
     </view>
   </view>
@@ -153,8 +153,8 @@
                  bindinput="onNotesInput" maxlength="200"
                  custom-style="margin: 24rpx 0;" />
       <van-button type="primary" block round
-                  custom-style="background: #2BB673; border: none; height: 88rpx;"
-                  bindtap="onCompleteWorkout">完成训练 🎉</van-button>
+                  custom-style="background: linear-gradient(180deg, #36BC76, #2FA866); border: none; height: 96rpx; font-size: 30rpx; font-weight: 500; box-shadow: 0 4rpx 12rpx rgba(47,168,102,0.22);"
+                  bindtap="onCompleteWorkout">完成训练</van-button>
     </view>
   </van-popup>
 </view>
